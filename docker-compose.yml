@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  maktaba.api:
+    image: ${DOCKER_REGISTRY-}maktabaapi
+    build:
+      context: .
+      dockerfile: src/Maktaba.Api/Dockerfile

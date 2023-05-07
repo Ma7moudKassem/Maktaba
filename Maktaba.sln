@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Api", "src\Maktaba.Api\Maktaba.Api.csproj", "{0EB8F491-1589-4096-8E44-0B290182E3DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Domain", "src\Maktaba.Domain\Maktaba.Domain.csproj", "{4B15F05A-D7B4-4CD5-89A1-05272875B36A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Application", "src\Maktaba.Application\Maktaba.Application.csproj", "{367FB774-D60A-4766-A3DA-4C907F5027B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Infrastructure", "src\Maktaba.Infrastructure\Maktaba.Infrastructure.csproj", "{E4ED612C-BBF0-4BAC-960E-863239B34194}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EB8F491-1589-4096-8E44-0B290182E3DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB8F491-1589-4096-8E44-0B290182E3DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB8F491-1589-4096-8E44-0B290182E3DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB8F491-1589-4096-8E44-0B290182E3DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B15F05A-D7B4-4CD5-89A1-05272875B36A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B15F05A-D7B4-4CD5-89A1-05272875B36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B15F05A-D7B4-4CD5-89A1-05272875B36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B15F05A-D7B4-4CD5-89A1-05272875B36A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{367FB774-D60A-4766-A3DA-4C907F5027B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{367FB774-D60A-4766-A3DA-4C907F5027B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{367FB774-D60A-4766-A3DA-4C907F5027B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{367FB774-D60A-4766-A3DA-4C907F5027B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {818125AE-BF8D-4538-87CF-4F69F51477FC}
+	EndGlobalSection
+EndGlobal
