@@ -17,7 +17,7 @@ public class BaseController<TEntity> : ControllerBase
         return Ok(entites);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("GetById")]
     public virtual async Task<IActionResult> GetByIdAsync([FromQuery] Guid id,
         CancellationToken cancellationToken = default)
     {

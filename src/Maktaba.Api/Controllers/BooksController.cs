@@ -22,7 +22,7 @@ public class BooksController : ControllerBase
         return Ok(dtos);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("GetById")]
     public async Task<IActionResult> GetBookById([FromQuery] Guid id)
     {
         Book book = await _mediator.Send(new GetBookByIdQuery(id));
@@ -74,7 +74,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteBook(Guid id)
+    public async Task<IActionResult> DeleteBook([FromQuery] Guid id)
     {
         try
         {
