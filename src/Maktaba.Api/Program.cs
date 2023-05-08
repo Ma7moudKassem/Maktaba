@@ -7,6 +7,8 @@ builder.Services.AddDomainLayer();
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 
+builder.Services.AddGrpc();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -36,6 +38,10 @@ app.UseCors("CorsPolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapGrpcService<BookServices>();
+
+//app.MapGet("/", () => "Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
 
 app.MapControllers();
 

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+option csharp_namespace = "Maktaba.Api";
+
+package book;
+
+service Maktaba {
+  rpc AddBook (BookMessage) returns (StatusMessage);
+}
+
+message BookMessage
+{
+	string Title = 1;
+	double Price = 2;
+	string Description = 3;
+	string CategoryName = 4;
+}
+
+message StatusMessage
+{
+	ReadingStatus Status = 1;
+	string Message = 2;
+}
+
+enum ReadingStatus
+{
+	UnKnown = 0;
+	Success = 1;
+	Failure = 2;
+}

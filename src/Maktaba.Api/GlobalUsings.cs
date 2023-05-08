@@ -8,4 +8,5 @@ global using Microsoft.AspNetCore.HttpOverrides;
 
 global using MediatR;
 global using Serilog;
+global using Grpc.Core;
 global using AutoMapper;

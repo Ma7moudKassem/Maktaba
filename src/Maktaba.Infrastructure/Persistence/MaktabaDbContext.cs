@@ -17,7 +17,7 @@ public class MaktabaDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("SqlConnection"),
-                b => b.MigrationsAssembly("Maktaba.Api"));
+                b => b.MigrationsAssembly("Maktaba.Infrastructure"));
 
         base.OnConfiguring(optionsBuilder);
     }

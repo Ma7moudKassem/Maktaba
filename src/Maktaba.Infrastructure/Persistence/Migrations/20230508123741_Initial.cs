@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Maktaba.Api.Migrations
+namespace Maktaba.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Inititate : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -45,7 +45,7 @@ namespace Maktaba.Api.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Price = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     CreationTime = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

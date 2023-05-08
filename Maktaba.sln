@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Api", "src\Maktaba.Api\Maktaba.Api.csproj", "{0EB8F491-1589-4096-8E44-0B290182E3DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Domain", "src\Maktaba.Domain\Maktaba.Domain.csproj", "{4B15F05A-D7B4-4CD5-89A1-05272875B36A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Domain", "src\Maktaba.Domain\Maktaba.Domain.csproj", "{4B15F05A-D7B4-4CD5-89A1-05272875B36A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Application", "src\Maktaba.Application\Maktaba.Application.csproj", "{367FB774-D60A-4766-A3DA-4C907F5027B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Application", "src\Maktaba.Application\Maktaba.Application.csproj", "{367FB774-D60A-4766-A3DA-4C907F5027B1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Infrastructure", "src\Maktaba.Infrastructure\Maktaba.Infrastructure.csproj", "{E4ED612C-BBF0-4BAC-960E-863239B34194}"
 EndProject
