@@ -8,6 +8,7 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, IEnumer
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Book>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken) =>
+    public async Task<IEnumerable<Book>> Handle(GetAllBooksQuery request, 
+        CancellationToken cancellationToken) =>
         await _repository.GetAsync(cancellationToken);
 }

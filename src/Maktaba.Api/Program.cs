@@ -3,7 +3,9 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 
+builder.Services.AddDomainLayer();
 builder.Services.AddApplicationLayer();
+builder.Services.AddInfrastructureLayer();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

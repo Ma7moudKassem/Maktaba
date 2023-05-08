@@ -8,6 +8,7 @@ public class GetBookByIdQueryHandler : IRequestHandler<GetBookByIdQuery, Book?>
         _repository = repository;
     }
 
-    public async Task<Book?> Handle(GetBookByIdQuery request, CancellationToken cancellationToken) =>
+    public async Task<Book?> Handle(GetBookByIdQuery request, 
+        CancellationToken cancellationToken) =>
         await _repository.GetByIdAsync(request.Id, cancellationToken);
 }

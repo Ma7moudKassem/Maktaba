@@ -12,7 +12,7 @@ public static class IServiceCollectionExtensions
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Hour)
+            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Hour)
             .CreateLogger();
 
         return services;

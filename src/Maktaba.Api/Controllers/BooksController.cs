@@ -1,16 +1,15 @@
-﻿using Maktaba.Infrastructure;
-using Serilog;
-
-namespace Maktaba.Api;
+﻿namespace Maktaba.Api;
 
 [Route("api/[controller]")]
 [ApiController]
 public class BooksController : ControllerBase
 {
     private readonly IMediator _mediator;
-    public BooksController(IMediator mediator)
+    private readonly IMapper _mapper;
+    public BooksController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -18,7 +17,9 @@ public class BooksController : ControllerBase
     {
         IEnumerable<Book> books = await _mediator.Send(new GetAllBooksQuery());
 
-        return Ok(books);
+        IEnumerable<BookDto> dtos = _mapper.Map<IEnumerable<BookDto>>(books);
+
+        return Ok(dtos);
     }
 
     [HttpGet("{id}")]
@@ -29,11 +30,13 @@ public class BooksController : ControllerBase
         if (book is null)
             return NotFound();
 
-        return Ok(book);
+        BookDto dto = _mapper.Map<BookDto>(book);
+
+        return Ok(dto);
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddBook(Book book)
+    public async Task<IActionResult> PostBook(Book book)
     {
         try
         {
@@ -44,7 +47,7 @@ public class BooksController : ControllerBase
 
             return StatusCode(201);
         }
-        catch (Exception exceptions) 
+        catch (Exception exceptions)
         {
             Log.Error(exceptions.GetExceptionErrorSimplified());
             throw;
@@ -52,7 +55,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateBook(Book book)
+    public async Task<IActionResult> PutBook(Book book)
     {
         try
         {
@@ -63,7 +66,7 @@ public class BooksController : ControllerBase
 
             return NoContent();
         }
-        catch (Exception exceptions) 
+        catch (Exception exceptions)
         {
             Log.Error(exceptions.GetExceptionErrorSimplified());
             throw;
@@ -71,7 +74,7 @@ public class BooksController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> AddBook(Guid id)
+    public async Task<IActionResult> DeleteBook(Guid id)
     {
         try
         {
@@ -79,7 +82,7 @@ public class BooksController : ControllerBase
 
             return NoContent();
         }
-        catch (Exception exceptions) 
+        catch (Exception exceptions)
         {
             Log.Error(exceptions.GetExceptionErrorSimplified());
             throw;
