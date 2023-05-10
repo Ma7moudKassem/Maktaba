@@ -1,0 +1,146 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7037"
+  },
+  "Routes": [
+    //---------------------Catalog.Books--------------------------//
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/books",
+      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
+      "DownstreamPathTemplate": "/api/books",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/books/GetById",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/books/GetById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+    //---------------------Catalog.Categories-----------------------//
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/categories",
+      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
+      "DownstreamPathTemplate": "/api/categories",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/categories/GetById",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/categories/GetById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+    //---------------------Catalog.Libraries------------------------//
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/Libraries",
+      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
+      "DownstreamPathTemplate": "/api/Libraries",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/catalog/Libraries/GetById",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Libraries/GetById",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7268
+        }
+      ]
+    },
+
+    //---------------------------------------------------------------//
+
+    //----------------------Identity.Auth----------------------------//
+    {
+      "UpstreamPathTemplate": "/gateway/Identity/Auth/register",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Auth/register",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7143
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Identity/Auth/logIn",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Auth/logIn",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7143
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Identity/Auth/addRole",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Auth/addRole",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7143
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Identity/Auth/revokeToken",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/Auth/revokeToken",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7143
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/Identity/Auth/refreshToken",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamPathTemplate": "/api/Auth/refreshToken",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7143
+        }
+      ]
+    }
+  ]
+}

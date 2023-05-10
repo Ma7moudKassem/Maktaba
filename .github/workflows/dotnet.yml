@@ -18,6 +18,6 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore src/Maktaba.Api
+      run: dotnet restore src/Maktaba.Catalog.Api
     - name: Build
-      run: dotnet build src/Maktaba.Api --no-restore
+      run: dotnet build src/Maktaba.Catalog.Api --no-restore

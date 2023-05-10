@@ -3,17 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Api", "src\Maktaba.Api\Maktaba.Api.csproj", "{0EB8F491-1589-4096-8E44-0B290182E3DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Catalog.Api", "src\Services\Catalog\Maktaba.Services.Catalog.Api\Maktaba.Services.Catalog.Api.csproj", "{0EB8F491-1589-4096-8E44-0B290182E3DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Domain", "src\Maktaba.Domain\Maktaba.Domain.csproj", "{4B15F05A-D7B4-4CD5-89A1-05272875B36A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Catalog.Domain", "src\Services\Catalog\Maktaba.Services.Catalog.Domain\Maktaba.Services.Catalog.Domain.csproj", "{4B15F05A-D7B4-4CD5-89A1-05272875B36A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Application", "src\Maktaba.Application\Maktaba.Application.csproj", "{367FB774-D60A-4766-A3DA-4C907F5027B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Catalog.Application", "src\Services\Catalog\Maktaba.Services.Catalog.Application\Maktaba.Services.Catalog.Application.csproj", "{367FB774-D60A-4766-A3DA-4C907F5027B1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Infrastructure", "src\Maktaba.Infrastructure\Maktaba.Infrastructure.csproj", "{E4ED612C-BBF0-4BAC-960E-863239B34194}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Catalog.Infrastructure", "src\Services\Catalog\Maktaba.Services.Catalog.Infrastructure\Maktaba.Services.Catalog.Infrastructure.csproj", "{E4ED612C-BBF0-4BAC-960E-863239B34194}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{9722CE9D-4AAE-4105-A9B8-B557FA9C693D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{53334998-06AE-4A9B-B746-CEE448352D1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gRPCTest", "src\Client\gRPCTest\gRPCTest.csproj", "{E7E636BF-57A8-4FCC-A989-434409227AC4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{5E9D504D-3452-4EB9-AE38-A0BEBB22FC88}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{1ED55D90-BD94-4AD4-82AD-5FB24B8C15F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{934659CE-638F-45CC-89BC-2DADCDDC7FD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Api", "src\Services\Identity\Maktaba.Services.Identity.Api\Maktaba.Services.Identity.Api.csproj", "{D5EEC533-217F-4CDB-B7C2-8224961D661F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Domain", "src\Services\Identity\Maktaba.Services.Identity.Domain\Maktaba.Services.Identity.Domain.csproj", "{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Infrastructure", "src\Services\Identity\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj", "{E427C51D-0658-4E52-9FF5-CCD335094A1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "src\ApiGateway\Ocelot\OcelotGateway\OcelotGateway.csproj", "{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ocelot", "Ocelot", "{F33E4304-77DE-40A6-97B7-E483080C5680}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,16 +51,38 @@ Global
 		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4ED612C-BBF0-4BAC-960E-863239B34194}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7E636BF-57A8-4FCC-A989-434409227AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7E636BF-57A8-4FCC-A989-434409227AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7E636BF-57A8-4FCC-A989-434409227AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7E636BF-57A8-4FCC-A989-434409227AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5EEC533-217F-4CDB-B7C2-8224961D661F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5EEC533-217F-4CDB-B7C2-8224961D661F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5EEC533-217F-4CDB-B7C2-8224961D661F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5EEC533-217F-4CDB-B7C2-8224961D661F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E427C51D-0658-4E52-9FF5-CCD335094A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E427C51D-0658-4E52-9FF5-CCD335094A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E427C51D-0658-4E52-9FF5-CCD335094A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E427C51D-0658-4E52-9FF5-CCD335094A1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{E7E636BF-57A8-4FCC-A989-434409227AC4} = {9722CE9D-4AAE-4105-A9B8-B557FA9C693D}
+		{0EB8F491-1589-4096-8E44-0B290182E3DA} = {5E9D504D-3452-4EB9-AE38-A0BEBB22FC88}
+		{4B15F05A-D7B4-4CD5-89A1-05272875B36A} = {5E9D504D-3452-4EB9-AE38-A0BEBB22FC88}
+		{367FB774-D60A-4766-A3DA-4C907F5027B1} = {5E9D504D-3452-4EB9-AE38-A0BEBB22FC88}
+		{E4ED612C-BBF0-4BAC-960E-863239B34194} = {5E9D504D-3452-4EB9-AE38-A0BEBB22FC88}
+		{5E9D504D-3452-4EB9-AE38-A0BEBB22FC88} = {53334998-06AE-4A9B-B746-CEE448352D1A}
+		{934659CE-638F-45CC-89BC-2DADCDDC7FD8} = {53334998-06AE-4A9B-B746-CEE448352D1A}
+		{D5EEC533-217F-4CDB-B7C2-8224961D661F} = {934659CE-638F-45CC-89BC-2DADCDDC7FD8}
+		{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5} = {934659CE-638F-45CC-89BC-2DADCDDC7FD8}
+		{E427C51D-0658-4E52-9FF5-CCD335094A1B} = {934659CE-638F-45CC-89BC-2DADCDDC7FD8}
+		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76} = {F33E4304-77DE-40A6-97B7-E483080C5680}
+		{F33E4304-77DE-40A6-97B7-E483080C5680} = {1ED55D90-BD94-4AD4-82AD-5FB24B8C15F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {818125AE-BF8D-4538-87CF-4F69F51477FC}
