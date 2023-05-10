@@ -17,7 +17,14 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore src/Maktaba.Catalog.Api
-    - name: Build
-      run: dotnet build src/Maktaba.Catalog.Api --no-restore
+    - name: Restore Catalog
+      run: dotnet restore src/Services/Catalog/Maktaba.Services.Catalog.Api    
+    
+    - name: Restore Identiy
+      run: dotnet restore src/Services/Identity/Maktaba.Services.Identity.Api
+
+    - name: Build Catalog
+      run: dotnet build src/Services/Catalog/Maktaba.Services.Catalog.Api --no-restore
+
+    - name: Build Identity
+      run: dotnet build src/Services/Identity/Maktaba.Services.Identity.Api --no-restore
