@@ -1,6 +1,9 @@
-﻿namespace Maktaba.Infrastructure;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
-public class MaktabaDbContext : DbContext
+namespace Maktaba.Infrastructure;
+
+public class MaktabaDbContext : IdentityDbContext<IdentityUser>
 {
     private readonly IConfiguration _configuration;
     public MaktabaDbContext(DbContextOptions options, IConfiguration configuration) : base(options) =>

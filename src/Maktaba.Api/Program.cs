@@ -5,7 +5,7 @@ builder.Services.ConfigureIISIntegration();
 
 builder.Services.AddDomainLayer();
 builder.Services.AddApplicationLayer();
-builder.Services.AddInfrastructureLayer();
+builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 builder.Services.AddGrpc();
 

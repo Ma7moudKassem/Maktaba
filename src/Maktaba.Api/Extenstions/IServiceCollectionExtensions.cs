@@ -1,4 +1,7 @@
-﻿namespace Maktaba.Api;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+namespace Maktaba.Api;
 
 public static class IServiceCollectionExtensions
 {

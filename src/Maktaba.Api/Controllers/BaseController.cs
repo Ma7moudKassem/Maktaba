@@ -4,34 +4,49 @@ public class BaseController<TEntity> : ControllerBase
     where TEntity : BaseEntity
 {
     private readonly IBaseRepository<TEntity> _repository;
-    public BaseController(IBaseRepository<TEntity> repository)
-    {
+    public BaseController(IBaseRepository<TEntity> repository) =>
         _repository = repository;
-    }
 
     [HttpGet]
-    public virtual async Task<IActionResult> GetAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<IActionResult> GetAsync(
+        CancellationToken cancellationToken)
     {
-        IEnumerable<TEntity> entites = await _repository.GetAsync(cancellationToken);
+        try
+        {
+            IEnumerable<TEntity> entites = await _repository.GetAsync(cancellationToken);
 
-        return Ok(entites);
+            return Ok(entites);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     [HttpGet("GetById")]
     public virtual async Task<IActionResult> GetByIdAsync([FromQuery] Guid id,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
-        TEntity? entity = await _repository.GetByIdAsync(id, cancellationToken);
+        try
+        {
+            TEntity? entity = await _repository.GetByIdAsync(id, cancellationToken);
 
-        if (entity is null)
-            return NotFound();
+            if (entity is null)
+                return NotFound();
 
-        return Ok(entity);
+            return Ok(entity);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     [HttpPost]
     public virtual async Task<IActionResult> PostAsync(TEntity entity,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -51,7 +66,7 @@ public class BaseController<TEntity> : ControllerBase
 
     [HttpPut]
     public virtual async Task<IActionResult> PutAsync(TEntity entity,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         try
         {
@@ -77,7 +92,7 @@ public class BaseController<TEntity> : ControllerBase
 
     [HttpDelete]
     public virtual async Task<IActionResult> DeleteAsync([FromQuery] Guid id,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken)
     {
         try
         {

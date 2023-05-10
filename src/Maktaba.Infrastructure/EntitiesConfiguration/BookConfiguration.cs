@@ -9,7 +9,7 @@ public class BookConfiguration : IEntityTypeConfiguration<Book>
         builder.HasIndex(x => x.Title)
             .IsUnique();
 
-        builder.Property(x => x.Title)
+        builder.Property(x => x.Title)  
             .IsRequired()
             .HasMaxLength(100);
 

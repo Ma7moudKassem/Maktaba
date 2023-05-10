@@ -2,9 +2,11 @@
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
+    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddDataBase();
+        services.ConfigureJwtToken(configuration);
 
         services.AddScoped<IBookRepository, BookRepository>()
                 .AddScoped<ILibraryRepository, LibraryRepository>()
@@ -30,6 +32,21 @@ public static class IServiceCollectionExtensions
             .GetService<MaktabaDbContext>();
 
         context?.Database.Migrate();
+
+        return services;
+    }
+
+    public static IServiceCollection ConfigureJwtToken(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<IJwtTokenValidationService, JwtTokenValidationService>();
+        services.AddAuthentication()
+          .AddJwtBearer(cfg =>
+          {
+              cfg.TokenValidationParameters = new MaktabaTokenValidationParameters(configuration);
+          });
+
+        services.AddDefaultIdentity<IdentityUser>()
+          .AddEntityFrameworkStores<MaktabaDbContext>();
 
         return services;
     }

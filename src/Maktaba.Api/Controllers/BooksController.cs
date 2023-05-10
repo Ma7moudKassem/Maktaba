@@ -15,24 +15,40 @@ public class BooksController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetBooks()
     {
-        IEnumerable<Book> books = await _mediator.Send(new GetAllBooksQuery());
+        try
+        {
+            IEnumerable<Book> books = await _mediator.Send(new GetAllBooksQuery());
 
-        IEnumerable<BookDto> dtos = _mapper.Map<IEnumerable<BookDto>>(books);
+            IEnumerable<BookDto> dtos = _mapper.Map<IEnumerable<BookDto>>(books);
 
-        return Ok(dtos);
+            return Ok(dtos);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     [HttpGet("GetById")]
     public async Task<IActionResult> GetBookById([FromQuery] Guid id)
     {
-        Book book = await _mediator.Send(new GetBookByIdQuery(id));
+        try
+        {
+            Book book = await _mediator.Send(new GetBookByIdQuery(id));
 
-        if (book is null)
-            return NotFound();
+            if (book is null)
+                return NotFound();
 
-        BookDto dto = _mapper.Map<BookDto>(book);
+            BookDto dto = _mapper.Map<BookDto>(book);
 
-        return Ok(dto);
+            return Ok(dto);
+        }
+        catch (Exception exception)
+        {
+            Log.Error(exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     [HttpPost]
