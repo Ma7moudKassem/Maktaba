@@ -19,15 +19,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{934659CE-638F-45CC-89BC-2DADCDDC7FD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Api", "src\Services\Identity\Maktaba.Services.Identity.Api\Maktaba.Services.Identity.Api.csproj", "{D5EEC533-217F-4CDB-B7C2-8224961D661F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Identity.Api", "src\Services\Identity\Maktaba.Services.Identity.Api\Maktaba.Services.Identity.Api.csproj", "{D5EEC533-217F-4CDB-B7C2-8224961D661F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Domain", "src\Services\Identity\Maktaba.Services.Identity.Domain\Maktaba.Services.Identity.Domain.csproj", "{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Identity.Domain", "src\Services\Identity\Maktaba.Services.Identity.Domain\Maktaba.Services.Identity.Domain.csproj", "{FFDFD7B2-88E9-4D78-A94C-B80EC6B0DEB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Identity.Infrastructure", "src\Services\Identity\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj", "{E427C51D-0658-4E52-9FF5-CCD335094A1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Identity.Infrastructure", "src\Services\Identity\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj", "{E427C51D-0658-4E52-9FF5-CCD335094A1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "src\ApiGateway\Ocelot\OcelotGateway\OcelotGateway.csproj", "{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "src\ApiGateway\Ocelot\OcelotGateway\OcelotGateway.csproj", "{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ocelot", "Ocelot", "{F33E4304-77DE-40A6-97B7-E483080C5680}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Order", "Order", "{174AEA82-8354-4EFC-94E9-A60E1BC74D13}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Order.Api", "src\Services\Order\Maktaba.Services.Order.Api\Maktaba.Services.Order.Api.csproj", "{4B92902D-D300-4706-9351-F4A816684370}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "protos", "protos", "{8F7D6B2B-B56E-49E2-81E5-D47EA565549E}"
+	ProjectSection(SolutionItems) = preProject
+		src\protos\catalog.proto = src\protos\catalog.proto
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Order.Domain", "src\Services\Order\Maktaba.Services.Order.Domain\Maktaba.Services.Order.Domain.csproj", "{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Order.Infrastructure", "src\Services\Order\Maktaba.Services.Order.Infrastructure\Maktaba.Services.Order.Infrastructure.csproj", "{5A904168-6BB2-4E14-8952-0DCC882BE692}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +80,18 @@ Global
 		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B92902D-D300-4706-9351-F4A816684370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B92902D-D300-4706-9351-F4A816684370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B92902D-D300-4706-9351-F4A816684370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B92902D-D300-4706-9351-F4A816684370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +108,10 @@ Global
 		{E427C51D-0658-4E52-9FF5-CCD335094A1B} = {934659CE-638F-45CC-89BC-2DADCDDC7FD8}
 		{8B1B5241-45FC-4DDA-B77D-99E15ADB1E76} = {F33E4304-77DE-40A6-97B7-E483080C5680}
 		{F33E4304-77DE-40A6-97B7-E483080C5680} = {1ED55D90-BD94-4AD4-82AD-5FB24B8C15F2}
+		{174AEA82-8354-4EFC-94E9-A60E1BC74D13} = {53334998-06AE-4A9B-B746-CEE448352D1A}
+		{4B92902D-D300-4706-9351-F4A816684370} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
+		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
+		{5A904168-6BB2-4E14-8952-0DCC882BE692} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {818125AE-BF8D-4538-87CF-4F69F51477FC}

@@ -1,4 +1,4 @@
-﻿namespace Maktaba.Services.Catalog.Infrastructure;
+﻿namespace Maktaba.Services.Order.Infrastructure;
 
 public static class IServiceCollectionExtensions
 {
@@ -6,10 +6,6 @@ public static class IServiceCollectionExtensions
         IConfiguration configuration)
     {
         services.AddDataBase();
-
-        services.AddScoped<IBookRepository, BookRepository>()
-                .AddScoped<ILibraryRepository, LibraryRepository>()
-                .AddScoped<ICategoryRepository, CategoryRepository>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>
@@ -26,24 +22,19 @@ public static class IServiceCollectionExtensions
                     };
                 });
 
-        Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Debug()
-            .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Hour)
-            .CreateLogger();
-
         return services;
     }
 
     public static IServiceCollection AddDataBase(this IServiceCollection services)
     {
-        services.AddDbContext<CatalogDbContext>(e =>
+        services.AddDbContext<OrderDbContext>(e =>
         e.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
         using IServiceScope serviceScope = services.BuildServiceProvider()
             .GetRequiredService<IServiceScopeFactory>().CreateScope();
 
-        CatalogDbContext? context = serviceScope.ServiceProvider
-            .GetService<CatalogDbContext>();
+        OrderDbContext? context = serviceScope.ServiceProvider
+            .GetService<OrderDbContext>();
 
         context?.Database.Migrate();
 

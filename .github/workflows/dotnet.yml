@@ -18,14 +18,22 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
+    #Restore Services
     - name: Restore Catalog
       run: dotnet restore src/Services/Catalog/Maktaba.Services.Catalog.Api    
-    
+   
     - name: Restore Identiy
-      run: dotnet restore src/Services/Identity/Maktaba.Services.Identity.Api
-
+      run: dotnet restore src/Services/Identity/Maktaba.Services.Identity.Api   
+      
+    - name: Restore Order
+      run: dotnet restore src/Services/Order/Maktaba.Services.Order.Api
+    
+    #Build Services
     - name: Build Catalog
       run: dotnet build src/Services/Catalog/Maktaba.Services.Catalog.Api --no-restore
 
     - name: Build Identity
       run: dotnet build src/Services/Identity/Maktaba.Services.Identity.Api --no-restore
+
+    - name: Build Order
+      run: dotnet build src/Services/Order/Maktaba.Services.Order.Api --no-restore

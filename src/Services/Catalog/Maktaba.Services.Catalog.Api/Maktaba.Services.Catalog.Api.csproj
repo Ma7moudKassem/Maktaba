@@ -12,7 +12,6 @@
 
 	<ItemGroup>
 		<None Remove="Program.cs~RF137564e0.TMP" />
-		<None Remove="protos\book.proto" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -34,7 +33,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Protobuf Include="protos\book.proto" GrpcServices="Server" />
+	  <Protobuf Include="..\..\..\protos\catalog.proto" GrpcServices="Server">
+	    <Link>Protos\catalog.proto</Link>
+	  </Protobuf>
 	</ItemGroup>
 
 </Project>

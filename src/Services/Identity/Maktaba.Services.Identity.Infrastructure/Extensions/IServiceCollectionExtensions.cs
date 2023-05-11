@@ -5,6 +5,8 @@ public static class IServiceCollectionExtensions
     public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services,
         IConfiguration configuration)
     {
+        services.AddDomainLayer();
+        services.AddScoped<IUserRepository, UserRepository>();
         services.AddDatabase();
 
         services.ConfigureJwt(configuration);

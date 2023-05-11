@@ -1,17 +1,16 @@
 syntax = "proto3";
 
-option csharp_namespace = "Maktaba.Catalog.gRPC";
+option csharp_namespace = "Maktaba.Services.Catalog.gRPC";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 
-package book;
+package catalog;
 
 service Maktaba {
   rpc AddBook (BookMessage) returns (StatusMessage);
   rpc UpdateBook(BookToUpdateMessage) returns (StatusMessage);
   rpc GetBook(UUID) returns (BookMessage);
-  rpc GenerateToken(TokenRequest) returns (TokenResponce);
   rpc AddReadingStream(stream BookMessage) returns (google.protobuf.Empty);
 }
 

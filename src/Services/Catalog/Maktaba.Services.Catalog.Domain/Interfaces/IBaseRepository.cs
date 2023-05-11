@@ -13,5 +13,6 @@ public interface IBaseRepository<TEntity> : IDisposable
     Task DeleteAsync(Expression<Func<TEntity, bool>> predicate, 
         CancellationToken cancellationToken = default);
     Task<bool> Exists(Guid id, CancellationToken cancellationToken = default);
-    Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+    Task<IDbContextTransaction> BeginTransactionAsync(
+        CancellationToken cancellationToken = default);
 }
