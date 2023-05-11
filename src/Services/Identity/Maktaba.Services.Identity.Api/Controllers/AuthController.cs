@@ -1,5 +1,7 @@
 ﻿namespace Maktaba.Services.Identity.Api;
 
+[Route("api/[controller]")]
+[ApiController]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;

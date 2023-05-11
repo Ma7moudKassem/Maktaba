@@ -5,62 +5,80 @@ public class AuthService : IAuthService
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly JWT _jwt;
+    private readonly IdentityDbContext _context;
 
-    public AuthService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager,
-        IOptions<JWT> jwt)
+    public AuthService(
+        UserManager<User> userManager,
+        RoleManager<IdentityRole> roleManager,
+        IOptions<JWT> jwt,
+        IdentityDbContext context)
     {
         _userManager = userManager;
         _roleManager = roleManager;
         _jwt = jwt.Value;
+        _context = context;
     }
 
     public async Task<AuthModel> RegisterAsync(RegisterModel model)
     {
-        if (await _userManager.FindByEmailAsync(model.Email) is not null)
-            return new AuthModel { Message = "Email is already registered!" };
-
-        if (await _userManager.FindByNameAsync(model.Username) is not null)
-            return new AuthModel { Message = "Username is already registered!" };
-
-        var user = new User
+        using IDbContextTransaction transaction = await _context.Database.BeginTransactionAsync();
+        try
         {
-            UserName = model.Username,
-            Email = model.Email,
-            FirstName = model.FirstName,
-            LastName = model.LastName
-        };
+            if (await _userManager.FindByEmailAsync(model.Email) is not null)
+                return new AuthModel { Message = "Email is already registered!" };
 
-        var result = await _userManager.CreateAsync(user, model.Password);
+            if (await _userManager.FindByNameAsync(model.Username) is not null)
+                return new AuthModel { Message = "Username is already registered!" };
 
-        if (!result.Succeeded)
-        {
-            var errors = string.Empty;
+            User user = new()
+            {
+                UserName = model.Username,
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                FullAddress = model.FullAddress
+            };
 
-            foreach (var error in result.Errors)
-                errors += $"{error.Description},";
+            var result = await _userManager.CreateAsync(user, model.Password);
 
-            return new AuthModel { Message = errors };
+            if (!result.Succeeded)
+            {
+                var errors = string.Empty;
+
+                foreach (var error in result.Errors)
+                    errors += $"{error.Description},";
+
+                return new AuthModel { Message = errors };
+            }
+
+            await _userManager.AddToRoleAsync(user, "User");
+
+            var jwtSecurityToken = await CreateJwtToken(user);
+
+            var refreshToken = GenerateRefreshToken();
+            user.RefreshTokens?.Add(refreshToken);
+            await _userManager.UpdateAsync(user);
+
+            await transaction.CommitAsync();
+
+            return new AuthModel
+            {
+                Email = user.Email,
+                ExpiresOn = jwtSecurityToken.ValidTo,
+                IsAuthenticated = true,
+                Roles = new List<string> { "User" },
+                Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                Username = user.UserName,
+                RefreshToken = refreshToken.Token,
+                RefreshTokenExpiration = refreshToken.ExpiresOn
+            };
+
         }
-
-        await _userManager.AddToRoleAsync(user, "User");
-
-        var jwtSecurityToken = await CreateJwtToken(user);
-
-        var refreshToken = GenerateRefreshToken();
-        user.RefreshTokens?.Add(refreshToken);
-        await _userManager.UpdateAsync(user);
-
-        return new AuthModel
+        catch (Exception exception)
         {
-            Email = user.Email,
-            ExpiresOn = jwtSecurityToken.ValidTo,
-            IsAuthenticated = true,
-            Roles = new List<string> { "User" },
-            Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-            Username = user.UserName,
-            RefreshToken = refreshToken.Token,
-            RefreshTokenExpiration = refreshToken.ExpiresOn
-        };
+            await transaction.RollbackAsync();
+            throw new Exception(exception.Message);
+        }
     }
 
     public async Task<AuthModel> GetTokenAsync(TokenRequestModel model)
@@ -135,7 +153,7 @@ public class AuthService : IAuthService
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim("uid", user.Id)
-            }
+        }
         .Union(userClaims)
         .Union(roleClaims);
 
@@ -210,7 +228,7 @@ public class AuthService : IAuthService
         return true;
     }
 
-    private static RefreshToken GenerateRefreshToken()
+    public RefreshToken GenerateRefreshToken()
     {
         var randomNumber = new byte[32];
 
@@ -221,7 +239,7 @@ public class AuthService : IAuthService
         return new RefreshToken
         {
             Token = Convert.ToBase64String(randomNumber),
-            ExpiresOn = DateTime.UtcNow.AddDays(10),
+            ExpiresOn = DateTime.UtcNow.AddMinutes(_jwt.DurationInMinutes),
             CreatedOn = DateTime.UtcNow
         };
     }

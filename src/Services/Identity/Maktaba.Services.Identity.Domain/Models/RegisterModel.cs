@@ -16,4 +16,7 @@ public class RegisterModel
 
     [StringLength(256)]
     public string Password { get; set; } = null!;
+
+    [StringLength(500)]
+    public string FullAddress { get; set; } = null!;
 }

@@ -1,4 +1,6 @@
-﻿namespace Maktaba.Services.Catalog.Infrastructure;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+namespace Maktaba.Services.Catalog.Infrastructure;
 
 public static class IServiceCollectionExtensions
 {
@@ -10,6 +12,21 @@ public static class IServiceCollectionExtensions
         services.AddScoped<IBookRepository, BookRepository>()
                 .AddScoped<ILibraryRepository, LibraryRepository>()
                 .AddScoped<ICategoryRepository, CategoryRepository>();
+
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(option =>
+                {
+                    option.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = configuration["JWT:Issuer"],
+                        ValidAudience = configuration["JWT:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
+                    };
+                });
 
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
