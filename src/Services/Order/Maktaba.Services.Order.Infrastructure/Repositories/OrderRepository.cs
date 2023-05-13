@@ -4,10 +4,20 @@ public class OrderRepository : IOrderRepository
 {
     private readonly OrderDbContext _context;
     private readonly DbSet<Domain.Order> _dbSet;
-    public OrderRepository(OrderDbContext context)
+    private readonly DbSet<User> _users;
+    private readonly DbSet<Book> _books;
+    private readonly IBookServices _bookServices;
+    private readonly IUserServices _userServices;
+    public OrderRepository(OrderDbContext context,
+        IBookServices bookServices,
+        IUserServices userServices)
     {
         _context = context;
         _dbSet = context.Set<Domain.Order>();
+        _books = context.Set<Book>();
+        _users = context.Set<User>();
+        _bookServices = bookServices;
+        _userServices = userServices;
     }
 
     public async Task<bool> Exists(Guid id) =>
@@ -42,8 +52,35 @@ public class OrderRepository : IOrderRepository
     public async Task AddOrderAsync(Domain.Order order,
         CancellationToken cancellationToken = default)
     {
-        await _dbSet.AddAsync(order, cancellationToken);
-        await _context.SaveChangesAsync(cancellationToken);
+        try
+        {
+            if (!await _users.AnyAsync(x => x.UserName == order.UserName, cancellationToken))
+            {
+                User user = await _userServices.GetUserAsync(order.UserName) ??
+                    throw new UserNotProvidedException(order.UserName);
+
+                await _users.AddAsync(user, cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+
+
+            foreach (var orderBook in order.OrderBooks)
+            {
+                if (!await _books.AnyAsync(x => x.Id == orderBook.BookId, cancellationToken))
+                {
+                    Book book = await _bookServices.GetBookByIdAsync(orderBook.BookId);
+                    book.Id = orderBook.BookId;
+                    await _books.AddAsync(book, cancellationToken);
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
+            }
+            await _dbSet.AddAsync(order, cancellationToken);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        catch (Exception exception)
+        {
+            throw new Exception(exception.Message);
+        }
     }
 
     public async Task UpdateOrderAsync(Domain.Order order,

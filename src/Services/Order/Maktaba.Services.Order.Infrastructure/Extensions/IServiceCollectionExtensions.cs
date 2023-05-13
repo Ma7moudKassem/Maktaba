@@ -8,7 +8,12 @@ public static class IServiceCollectionExtensions
         services.AddDataBase();
 
         services.AddScoped<IOrderRepository, OrderRepository>();
-        services.AddScoped<IUserServices, UserServices>();
+        services.AddScoped(sp => new HttpClient
+        {
+            BaseAddress = new Uri("https://localhost:7037")
+        })
+            .AddScoped<IUserServices, UserServices>()
+            .AddScoped<IBookServices, BookServices>();
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>

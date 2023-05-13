@@ -11,6 +11,9 @@ public class RegisterModel
     [StringLength(50)]
     public string Username { get; set; } = null!;
 
+    [StringLength(20)]
+    public string PhoneNumber { get; set; } = null!;
+
     [StringLength(128)]
     public string Email { get; set; } = null!;
 

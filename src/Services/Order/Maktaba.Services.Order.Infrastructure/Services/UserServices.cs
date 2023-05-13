@@ -9,5 +9,5 @@ public class UserServices : IUserServices
     }
 
     public async Task<User?> GetUserAsync(string userName) =>
-        await _httpClient.GetFromJsonAsync<User>($"gateway/catalog/users/?userName={userName}");
+        await _httpClient.GetFromJsonAsync<User>($"gateway/identity/users/?userName={userName}");
 }

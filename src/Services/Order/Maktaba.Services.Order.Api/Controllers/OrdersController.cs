@@ -15,6 +15,10 @@ public class OrdersController : ControllerBase
         _userServices = userServices;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetOrdersAsync() =>
+        Ok(await _repository.GetAllAsync());
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOrderByIdAsync([FromRoute] Guid id)
     {

@@ -2,7 +2,7 @@
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
+//[Authorize]
 public class BooksController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -31,8 +31,8 @@ public class BooksController : ControllerBase
         }
     }
 
-    [HttpGet("GetById")]
-    public async Task<IActionResult> GetBookById([FromQuery] Guid id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetBookById([FromRoute] Guid id)
     {
         try
         {

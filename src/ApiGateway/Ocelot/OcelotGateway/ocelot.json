@@ -17,9 +17,9 @@
       ]
     },
     {
-      "UpstreamPathTemplate": "/gateway/catalog/books/GetById",
+      "UpstreamPathTemplate": "/gateway/catalog/books/{id}",
       "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/books/GetById",
+      "DownstreamPathTemplate": "/api/books/{id}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -181,10 +181,9 @@
         }
       ]
     },
-
     {
       "UpstreamPathTemplate": "/gateway/Orders",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Post", "Get" ],
       "DownstreamPathTemplate": "/api/Orders",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
