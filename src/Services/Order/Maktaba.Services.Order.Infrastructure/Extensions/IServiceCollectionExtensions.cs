@@ -7,6 +7,9 @@ public static class IServiceCollectionExtensions
     {
         services.AddDataBase();
 
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IUserServices, UserServices>();
+
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(option =>
                 {

@@ -27,7 +27,7 @@ public class UsersController : ControllerBase
     }
 
     [HttpPut]
-    public async Task<IActionResult> UpdateUser([FromQuery] RegisterModel model)
+    public async Task<IActionResult> UpdateUser(RegisterModel model)
     {
         try
         {

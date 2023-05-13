@@ -1,6 +1,9 @@
+using Maktaba.Services.Order.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-sbuilder.Services.AddControllers();
+builder.Services.AddControllers();
+builder.Services.AddInfrastructureLayer(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

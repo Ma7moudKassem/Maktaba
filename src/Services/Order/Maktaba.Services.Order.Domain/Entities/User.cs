@@ -3,9 +3,6 @@
 public class User
 {
     [MaxLength(20)]
-    public string Id { get; set; } = null!;
-
-    [MaxLength(20)]
     public string FirstName { get; set; } = null!;
 
     [MaxLength(20)]
@@ -17,8 +14,9 @@ public class User
     [MaxLength(20)]
     public string? PhoneNumber { get; set; }
 
+    [Key]
     [MaxLength(20)]
-    public string? UserName { get; set; }
+    public string UserName { get; set; } = null!;
 
     [MaxLength(100)]
     public string FullAddress { get; set; } = null!;
