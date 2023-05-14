@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+    <PackageReference Include="MassTransit" Version="8.0.15" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
@@ -16,7 +20,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Integration\Maktaba.Integration.MessagingBus\Maktaba.Integration.MessagingBus.csproj" />
     <ProjectReference Include="..\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="..\..\..\protos\identity.proto" GrpcServices="Server">
+      <Link>Protos\identity.proto</Link>
+    </Protobuf>
   </ItemGroup>
 
 </Project>

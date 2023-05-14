@@ -1,13 +1,20 @@
-﻿namespace Maktaba.Services.Identity.Api;
+﻿using Maktaba.Integration.MessagingBus;
+using MassTransit;
+
+namespace Maktaba.Services.Identity.Api;
 
 [Route("api/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly IMessageBus _bus;
 
-    public AuthController(IAuthService authService) =>
+    public AuthController(IAuthService authService, IMessageBus bus)
+    {
         _authService = authService;
+        _bus = bus;
+    }
 
     [HttpPost("register")]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
@@ -22,6 +29,8 @@ public class AuthController : ControllerBase
 
         if (result.RefreshToken is not null)
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
+
+        await _bus.PublishMessage(result, "user");
 
         return Ok(result);
     }

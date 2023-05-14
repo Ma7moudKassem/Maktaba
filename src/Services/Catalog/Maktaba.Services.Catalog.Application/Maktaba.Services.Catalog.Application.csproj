@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Maktaba.Services.Catalog.Infrastructure\Maktaba.Services.Catalog.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

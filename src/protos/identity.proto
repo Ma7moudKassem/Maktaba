@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option csharp_namespace = "Maktaba.Services.Identity.gRPC";
+
+service Identity
+{
+	rpc GetUser(UserName) returns (User);
+}
+
+message UserName
+{
+	string UserName = 1;
+}
+
+message User
+{
+    string Name = 1;
+    string Email = 2;
+    string PhoneNumber = 3; 
+    string UserName = 4;
+    string FullAddress = 5;
+}
