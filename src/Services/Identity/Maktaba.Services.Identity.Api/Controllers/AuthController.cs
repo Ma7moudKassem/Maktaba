@@ -1,5 +1,6 @@
 ﻿using Maktaba.Integration.MessagingBus;
 using MassTransit;
+using MassTransit.Transports;
 
 namespace Maktaba.Services.Identity.Api;
 
@@ -30,7 +31,7 @@ public class AuthController : ControllerBase
         if (result.RefreshToken is not null)
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
 
-        await _bus.PublishMessage(result, "user");
+        await _bus.PublishMessage(message: result, queueName: "user-queue");
 
         return Ok(result);
     }

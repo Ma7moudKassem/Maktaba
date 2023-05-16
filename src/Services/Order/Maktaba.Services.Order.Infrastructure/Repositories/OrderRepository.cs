@@ -1,23 +1,43 @@
-﻿namespace Maktaba.Services.Order.Infrastructure;
+﻿global using Maktaba.Services.Identity.gRPC;
+using Grpc.Net.Client;
+
+namespace Maktaba.Services.Order.Infrastructure;
 
 public class OrderRepository : IOrderRepository
 {
-    private readonly OrderDbContext _context;
     private readonly DbSet<Domain.Order> _dbSet;
-    private readonly DbSet<User> _users;
+    private readonly DbSet<Domain.User> _users;
     private readonly DbSet<Book> _books;
+    private readonly GrpcChannel _channel;
+    private readonly IdentityServices.IdentityServicesClient _client;
+
+    private readonly OrderDbContext _context;
+    private readonly IConfiguration _configuration;
     private readonly IBookServices _bookServices;
-    private readonly IUserServices _userServices;
     public OrderRepository(OrderDbContext context,
-        IBookServices bookServices,
-        IUserServices userServices)
+        IConfiguration configuration,
+        IBookServices bookServices
+        )
     {
         _context = context;
-        _dbSet = context.Set<Domain.Order>();
-        _books = context.Set<Book>();
-        _users = context.Set<User>();
         _bookServices = bookServices;
-        _userServices = userServices;
+        _configuration = configuration;
+
+        _books = context.Set<Book>();
+        _dbSet = context.Set<Domain.Order>();
+        _users = context.Set<Domain.User>();
+
+        HttpClientHandler httpHandler = new()
+        {
+            ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+
+        _channel = GrpcChannel
+            .ForAddress("http://localhost:5111", new GrpcChannelOptions { HttpHandler = httpHandler });
+
+        _client = new IdentityServices.IdentityServicesClient(_channel);
+
     }
 
     public async Task<bool> Exists(Guid id) =>
@@ -56,9 +76,23 @@ public class OrderRepository : IOrderRepository
         {
             if (!await _users.AnyAsync(x => x.UserName == order.UserName, cancellationToken))
             {
-                User user = await _userServices.GetUserAsync(order.UserName) ??
+                UserName userName = new()
+                {
+                    UserName_ = order.UserName,
+                };
+
+                Identity.gRPC.User userFromRpc = await _client.GetUserAsync(userName,
+                    cancellationToken: cancellationToken) ??
                     throw new UserNotProvidedException(order.UserName);
 
+                Domain.User user = new()
+                {
+                    Email = userFromRpc.Email,
+                    Name = userFromRpc.Name,
+                    FullAddress = userFromRpc.FullAddress,
+                    PhoneNumber = userFromRpc.PhoneNumber,
+                    UserName = userFromRpc.UserName
+                };
                 await _users.AddAsync(user, cancellationToken);
                 await _context.SaveChangesAsync(cancellationToken);
             }

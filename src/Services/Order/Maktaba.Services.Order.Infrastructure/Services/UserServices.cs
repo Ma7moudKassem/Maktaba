@@ -8,6 +8,6 @@ public class UserServices : IUserServices
         _httpClient = httpClient;
     }
 
-    public async Task<User?> GetUserAsync(string userName) =>
-        await _httpClient.GetFromJsonAsync<User>($"gateway/identity/users/?userName={userName}");
+    public async Task<Domain.User?> GetUserAsync(string userName) =>
+        await _httpClient.GetFromJsonAsync<Domain.User>($"gateway/identity/users/?userName={userName}");
 }

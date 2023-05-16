@@ -9,11 +9,6 @@
 		<DockerfileContext>..\..</DockerfileContext>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
 	</PropertyGroup>
-
-	<ItemGroup>
-		<None Remove="Program.cs~RF137564e0.TMP" />
-	</ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Grpc.AspNetCore" Version="2.53.0" />
 		<PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
@@ -27,15 +22,14 @@
 		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
-
 	<ItemGroup>
-	  <ProjectReference Include="..\Maktaba.Services.Catalog.Application\Maktaba.Services.Catalog.Application.csproj" />
+		<ProjectReference Include="..\Maktaba.Services.Catalog.Application\Maktaba.Services.Catalog.Application.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Protobuf Include="..\..\..\protos\catalog.proto" GrpcServices="Server">
-	    <Link>Protos\catalog.proto</Link>
-	  </Protobuf>
+		<Protobuf Include="..\..\..\protos\catalog.proto" GrpcServices="Server">
+			<Link>Protos\catalog.proto</Link>
+		</Protobuf>
 	</ItemGroup>
 
 </Project>

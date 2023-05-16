@@ -2,31 +2,19 @@ syntax = "proto3";
 
 option csharp_namespace = "Maktaba.Services.Catalog.gRPC";
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
-
 package catalog;
 
-service Maktaba {
-  rpc AddBook (BookMessage) returns (StatusMessage);
-  rpc UpdateBook(BookToUpdateMessage) returns (StatusMessage);
-  rpc GetBook(UUID) returns (BookMessage);
-  rpc AddReadingStream(stream BookMessage) returns (google.protobuf.Empty);
+service Catalog {
+  rpc GetBookById(BookByIdRequest) returns (BookResponce);
+  rpc GetBooksByIds(BooksByIdsRequest) returns (BooksResponce);
 }
 
-message TokenRequest
+message BookByIdRequest
 {
-	string UserName = 1;
-	string Password = 2;
+	string Id = 1;
 }
 
-message TokenResponce
-{
-	bool Success = 1;
-	string Token = 2;
-	google.protobuf.Timestamp Expiration = 3;
-}
-message BookMessage
+message BookResponce
 {
 	string Id = 1;
 	string Title = 2;
@@ -35,36 +23,12 @@ message BookMessage
 	string CategoryName = 5;
 }
 
-message StatusMessage
+message BooksByIdsRequest
 {
-	ReadingStatus Status = 1;
-	string Message = 2;
+	repeated string Ids = 1;
 }
 
-enum ReadingStatus
+message BooksResponce
 {
-	UnKnown = 0;
-	Success = 1;
-	Failure = 2;
-}
-
-message BookToUpdateMessage
-{
-	string Id = 1;
-	string CategoryId = 2;
-    Category Category = 3;
-    string Title = 4;
-    double Price = 5;
-    string Description = 6; 
-}
-
-message Category
-{
-	string Id = 1;
-	string Name = 2;
-}
-
-message UUID
-{
-	string Id = 1;
+	repeated BookResponce Data = 1;
 }

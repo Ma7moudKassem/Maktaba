@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Maktaba.Services.Identity.Domain": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55295;http://localhost:55296"
+    }
+  }
+}

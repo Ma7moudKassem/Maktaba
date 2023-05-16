@@ -2,24 +2,21 @@
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddRabbitMqRequiredServices(this IServiceCollection services)
+    public static IServiceCollection AddRabbitMqRequiredServices(
+        this IServiceCollection services)
     {
-        services.AddMassTransit(x =>
+        services.AddMassTransit(mass =>
         {
-            x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+            mass.UsingRabbitMq((context, cfg) =>
             {
-                config.Host(new Uri("rabbitmq://localhost"), h =>
+                cfg.Host("localhost", h =>
                 {
                     h.Username("guest");
                     h.Password("guest");
                 });
-            }));
-        });
-        services.Configure<MassTransitHostOptions>(options =>
-        {
-            options.WaitUntilStarted = true;
-            options.StartTimeout = TimeSpan.FromSeconds(30);
-            options.StopTimeout = TimeSpan.FromMinutes(1);
+
+                cfg.ConfigureEndpoints(context);
+            });
         });
         services.AddScoped<IMessageBus, RabbitMQMessageBus>();
 

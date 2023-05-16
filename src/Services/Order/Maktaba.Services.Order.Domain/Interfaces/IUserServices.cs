@@ -2,5 +2,5 @@
 
 public interface IUserServices
 {
-    Task<User?> GetUserAsync(string userName);
+    Task<Domain.User?> GetUserAsync(string userName);
 }

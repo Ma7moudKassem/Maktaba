@@ -16,7 +16,7 @@ public class UsersController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetUserByUserName([FromQuery] string userName)
     {
-        User? user = await _repository.GetUserByUserNameAsync(userName);
+        Domain.User? user = await _repository.GetUserByUserNameAsync(userName);
 
         if (user is null)
             return NotFound($"User with user name: {userName} is not found");

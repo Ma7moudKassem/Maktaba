@@ -1,6 +1,4 @@
-﻿using Maktaba.Services.Order.Domain;
-
-namespace Maktaba.Services.Order.Api;
+﻿namespace Maktaba.Services.Order.Api;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -16,8 +14,11 @@ public class OrdersController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetOrdersAsync() =>
-        Ok(await _repository.GetAllAsync());
+    public async Task<IActionResult> GetOrdersAsync()
+    {
+
+        return Ok(await _repository.GetAllAsync());
+    }
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOrderByIdAsync([FromRoute] Guid id)

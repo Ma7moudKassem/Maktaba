@@ -2,17 +2,19 @@
 
 public class RabbitMQMessageBus : IMessageBus
 {
-    private readonly IBus _bus;
-    public RabbitMQMessageBus(IBus bus)
+    private readonly ISendEndpointProvider _endpointProvider;
+    public RabbitMQMessageBus(ISendEndpointProvider endpointProvider)
     {
-        _bus = bus;
+        _endpointProvider = endpointProvider;
     }
-    public async Task PublishMessage<T>(T message, string topicName)
+
+    public async Task PublishMessage<T>(T message, string queueName)
     {
-        Uri uri = new($"rabbitmq://localhost/{message}Queue");
-        var endPoint = await _bus.GetSendEndpoint(uri);
+        Uri uri = new($"rabbitmq://localhost/{queueName}");
+
+        var endpoint = await _endpointProvider.GetSendEndpoint(uri);
 
         if (message is not null)
-            await endPoint.Send(message);
+            await endpoint.Send(message);
     }
 }

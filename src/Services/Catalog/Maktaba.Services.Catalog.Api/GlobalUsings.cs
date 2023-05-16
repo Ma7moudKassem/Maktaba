@@ -3,7 +3,7 @@ global using Maktaba.Services.Catalog.gRPC;
 global using Maktaba.Services.Catalog.Domain;
 global using Maktaba.Services.Catalog.Application;
 global using Maktaba.Services.Catalog.Infrastructure;
-global using static Maktaba.Services.Catalog.gRPC.Maktaba;
+global using static Maktaba.Services.Catalog.gRPC.Catalog;
 
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.HttpOverrides;

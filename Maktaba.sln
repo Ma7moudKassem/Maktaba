@@ -45,9 +45,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Order.Infr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{4A4FA5A0-1FC0-4B07-98B9-C7C66608392C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Integration.Consumer", "src\Integration\Maktaba.Integration.Messages\Maktaba.Integration.Consumer.csproj", "{38B02B79-B3D7-4CAD-AFD9-10331861258F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Integration.MessagingBus", "src\Integration\Maktaba.Integration.MessagingBus\Maktaba.Integration.MessagingBus.csproj", "{E73B6678-7970-466A-AF2D-AA0F7C149DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Integration.MessagingBus", "src\Integration\Maktaba.Integration.MessagingBus\Maktaba.Integration.MessagingBus.csproj", "{E73B6678-7970-466A-AF2D-AA0F7C149DED}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Basket", "Basket", "{F9005EA0-C6E1-4478-B466-29478E019502}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maktaba.Services.Basket.Api", "src\Services\Basket\Maktaba.Services.Basket.Api\Maktaba.Services.Basket.Api.csproj", "{1B0D59E6-0814-412C-8B5A-122BB3A3A06E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,14 +101,14 @@ Global
 		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A904168-6BB2-4E14-8952-0DCC882BE692}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38B02B79-B3D7-4CAD-AFD9-10331861258F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38B02B79-B3D7-4CAD-AFD9-10331861258F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38B02B79-B3D7-4CAD-AFD9-10331861258F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38B02B79-B3D7-4CAD-AFD9-10331861258F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E73B6678-7970-466A-AF2D-AA0F7C149DED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E73B6678-7970-466A-AF2D-AA0F7C149DED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E73B6678-7970-466A-AF2D-AA0F7C149DED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E73B6678-7970-466A-AF2D-AA0F7C149DED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0D59E6-0814-412C-8B5A-122BB3A3A06E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0D59E6-0814-412C-8B5A-122BB3A3A06E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0D59E6-0814-412C-8B5A-122BB3A3A06E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0D59E6-0814-412C-8B5A-122BB3A3A06E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,8 +129,9 @@ Global
 		{4B92902D-D300-4706-9351-F4A816684370} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
 		{A8E602A6-A2BF-4DB2-BD3F-83AB51F88465} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
 		{5A904168-6BB2-4E14-8952-0DCC882BE692} = {174AEA82-8354-4EFC-94E9-A60E1BC74D13}
-		{38B02B79-B3D7-4CAD-AFD9-10331861258F} = {4A4FA5A0-1FC0-4B07-98B9-C7C66608392C}
 		{E73B6678-7970-466A-AF2D-AA0F7C149DED} = {4A4FA5A0-1FC0-4B07-98B9-C7C66608392C}
+		{F9005EA0-C6E1-4478-B466-29478E019502} = {53334998-06AE-4A9B-B746-CEE448352D1A}
+		{1B0D59E6-0814-412C-8B5A-122BB3A3A06E} = {F9005EA0-C6E1-4478-B466-29478E019502}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {818125AE-BF8D-4538-87CF-4F69F51477FC}

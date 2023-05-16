@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "Maktaba.Services.Identity.gRPC";
 
-service Identity
+service IdentityServices
 {
 	rpc GetUser(UserName) returns (User);
 }

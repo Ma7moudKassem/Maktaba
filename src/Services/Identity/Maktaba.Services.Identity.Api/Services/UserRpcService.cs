@@ -1,16 +1,13 @@
-﻿using Grpc.Core;
-using Maktaba.Services.Identity.gRPC;
-using static Maktaba.Services.Identity.gRPC.Identity;
+﻿namespace Maktaba.Services.Identity.Api;
 
-namespace Maktaba.Services.Identity.Api;
-
-public class UserRpcService : IdentityBase
+public class UserRpcService : IdentityServicesBase
 {
     private readonly IUserRepository _userRepository;
     public UserRpcService(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
+
     public override async Task<gRPC.User> GetUser(UserName request, ServerCallContext context)
     {
         Domain.User userFromDb = await _userRepository.GetUserByUserNameAsync(request.UserName_) ??
