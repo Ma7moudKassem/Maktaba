@@ -1,6 +1,6 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.ConfigureMassTransitConsumer(builder.Configuration);
+//builder.Services.ConfigureMassTransitConsumer(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddInfrastructureLayer(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
