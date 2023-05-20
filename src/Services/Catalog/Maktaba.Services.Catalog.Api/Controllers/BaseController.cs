@@ -1,4 +1,6 @@
-﻿namespace Maktaba.Services.Catalog.Api;
+﻿using System.Net;
+
+namespace Maktaba.Services.Catalog.Api;
 
 public class BaseController<TEntity> : ControllerBase
     where TEntity : BaseEntity

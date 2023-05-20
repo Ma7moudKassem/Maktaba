@@ -4,7 +4,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 
 builder.Services.AddDomainLayer();
-builder.Services.AddApplicationLayer();
+builder.Services.AddApplicationLayer(builder.Configuration);
 builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 //builder.Services.AddGrpc();

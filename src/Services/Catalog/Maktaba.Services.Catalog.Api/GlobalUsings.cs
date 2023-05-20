@@ -5,12 +5,13 @@ global using Maktaba.Services.Catalog.Application;
 global using Maktaba.Services.Catalog.Infrastructure;
 global using static Maktaba.Services.Catalog.gRPC.Catalog;
 
+global using System.Net;
+
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.HttpOverrides;
-global using Microsoft.AspNetCore.Authorization;
+global using Maktaba.Services.Catalog.Domain.ViewModels;
 
 global using MediatR;
 global using Serilog;
 global using Grpc.Core;
 global using AutoMapper;
-global using Google.Protobuf.WellKnownTypes;

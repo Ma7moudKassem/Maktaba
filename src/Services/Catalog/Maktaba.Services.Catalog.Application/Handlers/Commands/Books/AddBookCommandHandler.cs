@@ -12,7 +12,7 @@ public class AddBookCommandHandler : IRequestHandler<AddBookCommand>
     {
         try
         {
-            await _repository.AddAsync(request.Book, cancellationToken);
+            await _repository.AddBookAsync(request.Book);
         }
         catch (Exception exception)
         {

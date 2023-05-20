@@ -27,7 +27,7 @@ public class CatalogService : CatalogBase
         return responce;
     }
 
-    public override async Task<BooksResponce> GetBooksByIds(BooksByIdsRequest request, 
+    public override async Task<BooksResponce> GetBooksByIds(BooksByIdsRequest request,
         ServerCallContext context)
     {
         IEnumerable<Guid> ids = Enumerable.Empty<Guid>();
@@ -35,7 +35,7 @@ public class CatalogService : CatalogBase
         foreach (var id in request.Ids)
             ids = ids.Append(new Guid(id));
 
-        IEnumerable<Book> books = await _repository.GetAsync(x => ids.Contains(x.Id));
+        IEnumerable<Book> books = await _repository.GetByIdsAsync(ids);
 
         return MapToResponce(books);
     }

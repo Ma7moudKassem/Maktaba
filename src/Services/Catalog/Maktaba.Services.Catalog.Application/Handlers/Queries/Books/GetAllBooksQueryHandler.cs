@@ -8,7 +8,9 @@ public class GetAllBooksQueryHandler : IRequestHandler<GetAllBooksQuery, IEnumer
         _repository = repository;
     }
 
-    public async Task<IEnumerable<Book>> Handle(GetAllBooksQuery request, 
+    public async Task<IEnumerable<Book>> Handle(GetAllBooksQuery request,
         CancellationToken cancellationToken) =>
-        await _repository.GetAsync(cancellationToken);
+        await _repository.GetAsync(
+            pageIndex: request.PageIndex,
+            pageSize: request.PageSize);
 }

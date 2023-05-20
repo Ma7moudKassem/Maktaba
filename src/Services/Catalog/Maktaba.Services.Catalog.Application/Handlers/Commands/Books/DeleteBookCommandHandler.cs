@@ -12,7 +12,7 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand>
     {
         try
         {
-            await _repository.DeleteAsync(request.Id, cancellationToken);
+            await _repository.DeleteBookAsync(request.Id);
         }
         catch (Exception exception)
         {
