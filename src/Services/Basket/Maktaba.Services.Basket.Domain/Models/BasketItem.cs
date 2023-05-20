@@ -1,4 +1,4 @@
-﻿namespace Maktaba.Services.Basket.Api;
+﻿namespace Maktaba.Services.Basket.Domain;
 
 public class BasketItem : IValidatableObject
 {
@@ -6,6 +6,7 @@ public class BasketItem : IValidatableObject
     public Guid BookId { get; set; }
     public string BookName { get; set; } = null!;
     public decimal UnitPrice { get; set; }
+    public decimal OldUnitPrice { get; set; }
     public int Quantity { get; set; }
     public string? PictureUrl { get; set; }
 

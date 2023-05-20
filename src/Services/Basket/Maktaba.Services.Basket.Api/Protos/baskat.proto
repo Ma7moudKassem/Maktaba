@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "Maktaba.Services.Basket.gRPC";
+
+package Basket;
+
+service Basket
+{
+	rpc GetBasketById(BasketRequest) returns (CustomerBasketResponse);
+	rpc UpdateBasket(CustomerBasketRequest) returns (CustomerBasketResponse);
+}
+
+message BasketRequest
+{
+	string id = 1;
+}
+
+message BasketItemResponce
+{
+	string id = 1;
+	string bookId = 2;
+	string bookTitle = 3;
+	double price = 4;
+	double oldPrice = 5;
+	int32 quantity = 6;
+	string pictureurl = 7;
+}
+
+message CustomerBasketResponse
+{
+	string userId = 1;
+	repeated BasketItemResponce items = 2;
+}
+
+message CustomerBasketRequest 
+{
+	string userId = 1;
+	repeated BasketItemResponce items = 2;
+}

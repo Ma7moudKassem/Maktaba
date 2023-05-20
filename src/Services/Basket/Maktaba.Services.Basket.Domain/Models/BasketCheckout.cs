@@ -1,4 +1,4 @@
-﻿namespace Maktaba.Services.Basket.Api;
+﻿namespace Maktaba.Services.Basket.Domain;
 
 public class BasketCheckout
 {
