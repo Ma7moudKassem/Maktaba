@@ -5,6 +5,8 @@ global using Maktaba.Services.Identity.Domain;
 global using Maktaba.Services.Identity.Infrastructure;
 global using static Maktaba.Services.Identity.gRPC.IdentityServices;
 
+global using System.Net;
+
 global using Microsoft.AspNetCore.Mvc;
 
 global using AutoMapper;

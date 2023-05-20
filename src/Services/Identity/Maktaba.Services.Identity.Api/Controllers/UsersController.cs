@@ -1,6 +1,6 @@
 ﻿namespace Maktaba.Services.Identity.Api;
 
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class UsersController : ControllerBase
 {
@@ -13,7 +13,10 @@ public class UsersController : ControllerBase
         _mapper = mapper;
     }
 
+    //Get api/v1/users?userName={user name}
     [HttpGet]
+    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetUserByUserName([FromQuery] string userName)
     {
         Domain.User? user = await _repository.GetUserByUserNameAsync(userName);
@@ -26,7 +29,9 @@ public class UsersController : ControllerBase
         return Ok(dto);
     }
 
+    //Put api/v1/users
     [HttpPut]
+    [ProducesResponseType((int)HttpStatusCode.NoContent)]
     public async Task<IActionResult> UpdateUser(RegisterModel model)
     {
         try
@@ -39,6 +44,5 @@ public class UsersController : ControllerBase
         {
             throw new Exception(exception.Message);
         }
-
     }
 }

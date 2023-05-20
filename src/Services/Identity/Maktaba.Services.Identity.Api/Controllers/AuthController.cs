@@ -1,10 +1,6 @@
-﻿using Maktaba.Integration.MessagingBus;
-using MassTransit;
-using MassTransit.Transports;
+﻿namespace Maktaba.Services.Identity.Api;
 
-namespace Maktaba.Services.Identity.Api;
-
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
@@ -17,16 +13,19 @@ public class AuthController : ControllerBase
         _bus = bus;
     }
 
+    //Post api/v1/auth/register
     [HttpPost("register")]
+    [ProducesResponseType(typeof(AuthModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
     {
         if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+            return BadRequest();
 
         AuthModel result = await _authService.RegisterAsync(model);
 
         if (!result.IsAuthenticated)
-            return BadRequest(result.Message);
+            return BadRequest();
 
         if (result.RefreshToken is not null)
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
@@ -36,13 +35,16 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
+    //Post api/v1/auth/logIn
     [HttpPost("logIn")]
+    [ProducesResponseType(typeof(AuthModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
     {
         AuthModel result = await _authService.GetTokenAsync(model);
 
         if (!result.IsAuthenticated)
-            return BadRequest(result.Message);
+            return BadRequest();
 
         if (!string.IsNullOrEmpty(result.RefreshToken))
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
@@ -50,21 +52,27 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
+    //Post api/v1/auth/addRole
     [HttpPost("addRole")]
+    [ProducesResponseType(typeof(AddRoleModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> AddRoleAsync([FromBody] AddRoleModel model)
     {
         if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+            return BadRequest();
 
         string result = await _authService.AddRoleAsync(model);
 
         if (!string.IsNullOrEmpty(result))
-            return BadRequest(result);
+            return BadRequest();
 
         return Ok(model);
     }
 
+    //Get api/v1/auth/refreshToken
     [HttpGet("refreshToken")]
+    [ProducesResponseType(typeof(AuthModel), (int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RefreshToken()
     {
         string? refreshToken = Request.Cookies["refreshToken"];
@@ -74,7 +82,7 @@ public class AuthController : ControllerBase
             result = await _authService.RefreshTokenAsync(refreshToken);
 
         if (!result.IsAuthenticated)
-            return BadRequest(result);
+            return BadRequest();
 
         if (result.RefreshToken is not null)
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
@@ -82,18 +90,21 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
+    //Post api/v1/auth/revokeToken
     [HttpPost("revokeToken")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RevokeToken([FromBody] RevokeToken model)
     {
         string? token = model.Token ?? Request.Cookies["refreshToken"];
 
         if (string.IsNullOrEmpty(token))
-            return BadRequest("Token is required!");
+            return BadRequest();
 
         bool result = await _authService.RevokeTokenAsync(token);
 
         if (!result)
-            return BadRequest("Token is invalid!");
+            return BadRequest();
 
         return Ok();
     }
