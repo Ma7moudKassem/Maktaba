@@ -24,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Protobuf Include="..\..\..\protos\identity.proto" GrpcServices="Client">
+	  <Protobuf Include="..\..\Identity\Maktaba.Services.Identity.Api\Proto\identity.proto" GrpcServices="Client">
 	    <Link>Protos\identity.proto</Link>
 	  </Protobuf>
 	</ItemGroup>

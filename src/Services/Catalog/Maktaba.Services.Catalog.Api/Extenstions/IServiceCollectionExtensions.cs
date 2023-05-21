@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-
-namespace Maktaba.Services.Catalog.Api;
+﻿namespace Maktaba.Services.Catalog.Api;
 
 public static class IServiceCollectionExtensions
 {
@@ -15,13 +12,6 @@ public static class IServiceCollectionExtensions
             .AllowAnyHeader()
             .AllowAnyMethod());
         });
-
-        return services;
-    }
-
-    public static IServiceCollection ConfigureIISIntegration(this IServiceCollection services)
-    {
-        services.Configure<IISOptions>(options => { });
 
         return services;
     }

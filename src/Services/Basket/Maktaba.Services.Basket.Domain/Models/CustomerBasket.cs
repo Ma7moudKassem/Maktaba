@@ -2,11 +2,16 @@
 
 public class CustomerBasket
 {
-    public CustomerBasket(Guid customerId)
+    public CustomerBasket(Guid userId)
     {
-        BuyerId = customerId;
+        UserId = userId;
     }
 
-    public Guid BuyerId { get; set; }
+    public CustomerBasket()
+    {
+
+    }
+
+    public Guid UserId { get; set; }
     public List<BasketItem> Items { get; set; } = new();
 }

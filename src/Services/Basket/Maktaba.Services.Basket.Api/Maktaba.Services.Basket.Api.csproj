@@ -7,11 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Protos\baskat.proto" />
+	  <None Remove="Proto\baskat.proto" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+		<PackageReference Include="StackExchange.Redis" Version="2.6.111" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
 	</ItemGroup>
 
@@ -24,6 +25,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Protobuf Include="Protos\baskat.proto" GrpcServices="Server" />
+	  <Protobuf Include="Proto\baskat.proto" GrpcServices="Server" />
 	</ItemGroup>
 </Project>

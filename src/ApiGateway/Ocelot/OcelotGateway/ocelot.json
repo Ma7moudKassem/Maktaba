@@ -1,197 +1,235 @@
 {
+  "Routes": [
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/books",
+    //  "UpstreamHttpMethod": [ "Post", "Put" ],
+    //  "DownstreamPathTemplate": "/api/v1/books",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/books/?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "api/v1/Books/?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/Books/{id}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "api/v1/Books/{id}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/books/withName/name?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "api/v1/books/withName/name?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/books/withCategory/categoryId?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "api/v1/books/withCategory/categoryId?pageSize={pageSize}&pageIndex={pageIndex}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/catalog/books/{id}",
+    //  "UpstreamHttpMethod": [ "Delete" ],
+    //  "DownstreamPathTemplate": "api/v1/books/{id}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/catalog/categories",
+    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+    //  "DownstreamPathTemplate": "/api/categories",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/catalog/categories/GetById",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "/api/categories/GetById",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/catalog/Libraries",
+    //  "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+    //  "DownstreamPathTemplate": "/api/Libraries",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/catalog/Libraries/GetById",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "/api/Libraries/GetById",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7268
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/register",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamPathTemplate": "/api/v1/Auth/register",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/logIn",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamPathTemplate": "/api/v1/Auth/logIn",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/addRole",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamPathTemplate": "/api/v1/Auth/addRole",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/revokeToken",
+    //  "UpstreamHttpMethod": [ "Post" ],
+    //  "DownstreamPathTemplate": "/api/v1/Auth/revokeToken",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/refreshToken",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "/api/v1/Auth/refreshToken",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Users/?userName={userName}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "/api/v1/Users/?userName={userName}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/v1/Identity/Users",
+    //  "UpstreamHttpMethod": [ "Put" ],
+    //  "DownstreamPathTemplate": "/api/v1/Users",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7143
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/Orders/{id}",
+    //  "UpstreamHttpMethod": [ "Get" ],
+    //  "DownstreamPathTemplate": "/api/Orders/{id}",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7211
+    //    }
+    //  ]
+    //},
+    //{
+    //  "UpstreamPathTemplate": "/gateway/Orders",
+    //  "UpstreamHttpMethod": [ "Post", "Get" ],
+    //  "DownstreamPathTemplate": "/api/Orders",
+    //  "DownstreamScheme": "https",
+    //  "DownstreamHostAndPorts": [
+    //    {
+    //      "Host": "localhost",
+    //      "Port": 7211
+    //    }
+    //  ]
+    //}
+  ],
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:7037"
-  },
-  "Routes": [
-    //---------------------Catalog.Books--------------------------//
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/books",
-      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
-      "DownstreamPathTemplate": "/api/books",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/books/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/books/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-    //---------------------Catalog.Categories-----------------------//
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/categories",
-      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
-      "DownstreamPathTemplate": "/api/categories",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/categories/GetById",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/categories/GetById",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-    //---------------------Catalog.Libraries------------------------//
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/Libraries",
-      "UpstreamHttpMethod": [ "Get", "Post", "But", "Delete" ],
-      "DownstreamPathTemplate": "/api/Libraries",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/catalog/Libraries/GetById",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Libraries/GetById",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7268
-        }
-      ]
-    },
-
-    //---------------------------------------------------------------//
-
-    //----------------------Identity.Auth----------------------------//
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Auth/register",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/Auth/register",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Auth/logIn",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/Auth/logIn",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Auth/addRole",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/Auth/addRole",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Auth/revokeToken",
-      "UpstreamHttpMethod": [ "Post" ],
-      "DownstreamPathTemplate": "/api/Auth/revokeToken",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Auth/refreshToken",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Auth/refreshToken",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Users/?userName={userName}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Users/?userName={userName}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Identity/Users",
-      "UpstreamHttpMethod": [ "Put" ],
-      "DownstreamPathTemplate": "/api/Users",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7143
-        }
-      ]
-    },
-
-    //----------------------Order-----------------------------------//
-
-    {
-      "UpstreamPathTemplate": "/gateway/Orders/{id}",
-      "UpstreamHttpMethod": [ "Get" ],
-      "DownstreamPathTemplate": "/api/Orders/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7211
-        }
-      ]
-    },
-    {
-      "UpstreamPathTemplate": "/gateway/Orders",
-      "UpstreamHttpMethod": [ "Post", "Get" ],
-      "DownstreamPathTemplate": "/api/Orders",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7211
-        }
-      ]
-    }
-  ]
+  }
 }

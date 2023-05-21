@@ -45,7 +45,7 @@ public static class IServiceCollectionExtensions
         CatalogDbContext? context = serviceScope.ServiceProvider
             .GetService<CatalogDbContext>();
 
-        context?.Database.Migrate();
+        //context?.Database.Migrate();
 
         return services;
     }

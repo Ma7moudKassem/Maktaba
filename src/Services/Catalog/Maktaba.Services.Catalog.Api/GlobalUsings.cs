@@ -9,6 +9,7 @@ global using System.Net;
 
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.HttpOverrides;
+global using Microsoft.AspNetCore.Server.Kestrel.Core;
 global using Maktaba.Services.Catalog.Domain.ViewModels;
 
 global using MediatR;

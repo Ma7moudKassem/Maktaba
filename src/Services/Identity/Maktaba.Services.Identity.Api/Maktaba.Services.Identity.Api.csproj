@@ -1,33 +1,35 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
-    <PackageReference Include="MassTransit" Version="8.0.15" />
-    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
-    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-	  </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+	  <None Remove="Proto\identity.proto" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Integration\Maktaba.Integration.MessagingBus\Maktaba.Integration.MessagingBus.csproj" />
-    <ProjectReference Include="..\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+		<PackageReference Include="MassTransit" Version="8.0.15" />
+		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.0.15" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Protobuf Include="..\..\..\protos\identity.proto" GrpcServices="Server">
-      <Link>Protos\identity.proto</Link>
-    </Protobuf>
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Integration\Maktaba.Integration.MessagingBus\Maktaba.Integration.MessagingBus.csproj" />
+		<ProjectReference Include="..\Maktaba.Services.Identity.Infrastructure\Maktaba.Services.Identity.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Protobuf Include="Proto\identity.proto" GrpcServices="Server" />
+	</ItemGroup>
 
 </Project>
