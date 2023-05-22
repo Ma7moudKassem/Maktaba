@@ -2,8 +2,8 @@
 
 public interface IBasketRepository
 {
-    Task<CustomerBasket?> GetBasketAsync(Guid customerId);
-    Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket basket);
+    Task<UserBasket?> GetBasketAsync(string userIdentity);
+    Task<UserBasket?> AddBasketAsync(UserBasket basket);
     IEnumerable<string> GetUsers();
-    Task<bool> DeleteBasketAsync(string id);
+    Task<bool> DeleteBasketAsync(string userIdentity);
 }

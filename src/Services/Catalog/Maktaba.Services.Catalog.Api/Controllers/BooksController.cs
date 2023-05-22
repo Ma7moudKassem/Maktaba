@@ -1,10 +1,8 @@
-﻿using Serilog;
-
-namespace Maktaba.Services.Catalog.Api;
+﻿namespace Maktaba.Services.Catalog.Api;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-//[Authorize]
+[Authorize]
 public class BooksController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -28,29 +26,21 @@ public class BooksController : ControllerBase
     [ProducesResponseType(typeof(PaginatedItemsViewModel<BookDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetBooks([FromQuery] int pageSize = 10, [FromQuery] int pageIndex = 0)
     {
-        try
-        {
-            _logger.LogError("Send query to get all books");
-            IEnumerable<Book> books = await
-                _mediator.Send(new GetAllBooksQuery(PageSize: pageSize, PageIndex: pageIndex));
+        _logger.LogInformation("Send query: {queryName} to get all books", nameof(GetAllBooksQuery));
 
-            IEnumerable<BookDto> dtos =
-                _mapper.Map<IEnumerable<BookDto>>(books);
+        IEnumerable<Book> books = await
+            _mediator.Send(new GetAllBooksQuery(PageSize: pageSize, PageIndex: pageIndex));
 
-            long totalCount = await _repository.BooksTotalCount();
+        IEnumerable<BookDto> dtos =
+            _mapper.Map<IEnumerable<BookDto>>(books);
 
-            return Ok(new PaginatedItemsViewModel<BookDto>(
-                pageIndex: pageIndex,
-                pageSize: pageSize,
-                data: dtos,
-                count: totalCount
-                ));
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+        long totalCount = await _repository.BooksTotalCount();
+
+        return Ok(new PaginatedItemsViewModel<BookDto>(
+            pageIndex: pageIndex,
+            pageSize: pageSize,
+            data: dtos,
+            count: totalCount));
     }
 
     //GET api/v1/books/id
@@ -59,22 +49,17 @@ public class BooksController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
     public async Task<ActionResult<BookDto>> GetBookById([FromRoute] Guid id)
     {
-        try
-        {
-            Book book = await _mediator.Send(new GetBookByIdQuery(id));
+        _logger.LogInformation("Send Query: {QuernName} to get book by id: {BookId}",
+            nameof(GetBookByIdQuery), id);
 
-            if (book is null)
-                return NotFound($"Book with id: {id} is not found");
+        Book book = await _mediator.Send(new GetBookByIdQuery(id));
 
-            BookDto dto = _mapper.Map<BookDto>(book);
+        if (book is null)
+            return NotFound($"Book with id: {id} is not found");
 
-            return Ok(dto);
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+        BookDto dto = _mapper.Map<BookDto>(book);
+
+        return Ok(dto);
     }
 
     //GET api/v1/books/withName/name?pageSize=10&pageIndex=0
@@ -83,6 +68,9 @@ public class BooksController : ControllerBase
     public async Task<IActionResult> GetBooksWithNama(
         [FromRoute] string name, [FromQuery] int pageSize, [FromQuery] int pageIndex)
     {
+        _logger.LogInformation("Send Query: {QuernName} to get book by name: {name}",
+            nameof(GetBooksWithNameQuery), name);
+
         long totalCount = await _repository.BooksByNameTotalCount(name);
 
         IEnumerable<Book> books = await _mediator.Send(new GetBooksWithNameQuery(Name: name, PageIndex: pageIndex, PageSize: pageSize));
@@ -103,6 +91,9 @@ public class BooksController : ControllerBase
     public async Task<IActionResult> GetBooksWithCategory(
         [FromRoute] Guid categoryId, [FromQuery] int pageSize, [FromQuery] int pageIndex)
     {
+        _logger.LogInformation("Send Query: {QuernName} to get book by category id: {categoryId}",
+            nameof(GetBooksByCategoryQuery), categoryId);
+
         long totalCount = await _repository.BooksByCategoryTotalCount(categoryId);
 
         IEnumerable<Book> books = await _mediator
@@ -125,6 +116,10 @@ public class BooksController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Send command: {commandName} to create book with title: {bookName}",
+                nameof(AddBookCommand),
+                book.Title);
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -132,9 +127,11 @@ public class BooksController : ControllerBase
 
             return StatusCode(201);
         }
-        catch (Exception exceptions)
+        catch (Exception exception)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exception, "Faild to create book with id: {id} and exception: {exMessage}",
+                book.Id,
+                exception.GetExceptionErrorSimplified());
             throw;
         }
     }
@@ -147,6 +144,10 @@ public class BooksController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Send command: {commandName} to update book with id: {bookId}",
+                nameof(UpdateBookCommand),
+                book.Id);
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -154,9 +155,11 @@ public class BooksController : ControllerBase
 
             return NoContent();
         }
-        catch (Exception exceptions)
+        catch (Exception exception)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exception, "Faild to update book with id: {id} and exception: {exMessage}",
+                book.Id,
+                exception.GetExceptionErrorSimplified());
             throw;
         }
     }
@@ -168,13 +171,18 @@ public class BooksController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Send command: {commandName} to delete book with id: {bookId}",
+                nameof(UpdateBookCommand),
+                id);
             await _mediator.Send(new DeleteBookCommand(id));
 
             return NoContent();
         }
-        catch (Exception exceptions)
+        catch (Exception exception)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exception, "Faild to delete book with id: {id} and exception: {exMessage}",
+                id,
+                exception.GetExceptionErrorSimplified());
             throw;
         }
     }

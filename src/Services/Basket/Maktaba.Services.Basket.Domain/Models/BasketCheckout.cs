@@ -2,7 +2,6 @@
 
 public class BasketCheckout
 {
-    public Guid RequestId { get; set; }
     public string Buyer { get; set; } = null!;
     public string City { get; set; } = null!;
     public string Street { get; set; } = null!;

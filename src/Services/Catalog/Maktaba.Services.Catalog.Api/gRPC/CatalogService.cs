@@ -12,7 +12,7 @@ public class CatalogService : CatalogBase
 
     public override async Task<BookResponce> GetBookById(BookByIdRequest request, ServerCallContext context)
     {
-        var book = await _repository.GetByIdAsync(new Guid(request.Id)) ??
+        var book = await _repository.GetByIdAsync(Guid.Parse(request.Id)) ??
             throw new BookNotProvidedException(request.Id);
 
         BookResponce responce = new()
@@ -33,7 +33,7 @@ public class CatalogService : CatalogBase
         IEnumerable<Guid> ids = Enumerable.Empty<Guid>();
 
         foreach (var id in request.Ids)
-            ids = ids.Append(new Guid(id));
+            ids = ids.Append(Guid.Parse(id));
 
         IEnumerable<Book> books = await _repository.GetByIdsAsync(ids);
 

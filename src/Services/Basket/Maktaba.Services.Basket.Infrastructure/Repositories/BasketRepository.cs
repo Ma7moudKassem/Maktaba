@@ -2,25 +2,25 @@
 
 public class BasketRepository : IBasketRepository
 {
-    private readonly IDatabaseAsync _database;
+    private readonly IDatabase _database;
     private readonly ConnectionMultiplexer _redis;
 
-    public BasketRepository(IDatabaseAsync databse, ConnectionMultiplexer redis)
+    public BasketRepository(ConnectionMultiplexer redis)
     {
-        _database = databse;
         _redis = redis;
+        _database = redis.GetDatabase();
     }
-    public async Task<bool> DeleteBasketAsync(string id) =>
-       await _database.KeyDeleteAsync(id);
+    public async Task<bool> DeleteBasketAsync(string userIdentity) =>
+       await _database.KeyDeleteAsync(userIdentity);
 
-    public async Task<CustomerBasket?> GetBasketAsync(Guid userId)
+    public async Task<UserBasket?> GetBasketAsync(string userId)
     {
         var data = await _database.StringGetAsync(userId.ToString());
 
         if (data.IsNullOrEmpty)
             return null;
 
-        return JsonSerializer.Deserialize<CustomerBasket>(data, new JsonSerializerOptions
+        return JsonSerializer.Deserialize<UserBasket?>(data, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
         });
@@ -34,14 +34,15 @@ public class BasketRepository : IBasketRepository
         return data.Select(key => key.ToString());
     }
 
-    public async Task<CustomerBasket?> UpdateBasketAsync(CustomerBasket basket)
+    public async Task<UserBasket?> AddBasketAsync(UserBasket basket)
     {
-        bool created = await _database.StringSetAsync(basket.UserId.ToString(), JsonSerializer.Serialize(basket));
+        bool created = await _database.StringSetAsync(basket.UserIdentity,
+            JsonSerializer.Serialize(basket));
 
         if (!created)
             return null;
 
-        return await GetBasketAsync(basket.UserId);
+        return await GetBasketAsync(basket.UserIdentity);
     }
 
     IServer GetServer()

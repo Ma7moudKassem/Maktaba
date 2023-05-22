@@ -10,6 +10,8 @@ public static class SharedExtensions
 
         builder.Services.AddEventBus(builder.Configuration);
 
+        builder.Services.AddHttpContextAccessor();
+
         builder.Host.AddSeriLog();
 
         return builder;
@@ -128,6 +130,7 @@ public static class SharedExtensions
     public static IHostBuilder AddSeriLog(this IHostBuilder host)
     {
         var logger = new LoggerConfiguration()
+            .WriteTo.Console()
 
             // Fatal
             .WriteTo.Logger(l => l

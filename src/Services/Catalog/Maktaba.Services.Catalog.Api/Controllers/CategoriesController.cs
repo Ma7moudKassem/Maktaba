@@ -5,8 +5,13 @@
 public class CategoriesController : ControllerBase
 {
     private readonly ICategoryRepository _repository;
-    public CategoriesController(ICategoryRepository repository) =>
+    private readonly ILogger<CategoriesController> _logger;
+    public CategoriesController(ICategoryRepository repository,
+        ILogger<CategoriesController> logger)
+    {
         _repository = repository;
+        _logger = logger;
+    }
 
     //GET api/v1/Categories
     [HttpGet]
@@ -14,19 +19,12 @@ public class CategoriesController : ControllerBase
     public virtual async Task<IActionResult> GetAsync(
         CancellationToken cancellationToken)
     {
-        try
-        {
-            IEnumerable<Category> entites = await _repository.GetAsync(cancellationToken);
+        _logger.LogInformation("Getting All Categories...");
 
-            return Ok(entites);
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+        IEnumerable<Category> entites = await _repository.GetAsync(cancellationToken);
+
+        return Ok(entites);
     }
-
 
     //GET api/v1/Categories/{id}
     [HttpGet("{id}")]
@@ -36,20 +34,14 @@ public class CategoriesController : ControllerBase
     public virtual async Task<IActionResult> GetByIdAsync([FromRoute] Guid id,
         CancellationToken cancellationToken)
     {
-        try
-        {
-            Category? entity = await _repository.GetByIdAsync(id, cancellationToken);
+        _logger.LogInformation("Getting Category With Id: {categoryId}...", id);
 
-            if (entity is null)
-                return NotFound();
+        Category? entity = await _repository.GetByIdAsync(id, cancellationToken);
 
-            return Ok(entity);
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+        if (entity is null)
+            return NotFound();
+
+        return Ok(entity);
     }
 
 
@@ -57,21 +49,23 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.Created)]
-    public virtual async Task<IActionResult> PostAsync(Category entity,
+    public virtual async Task<IActionResult> PostAsync(Category category,
         CancellationToken cancellationToken)
     {
         try
         {
+            _logger.LogInformation("Creating Category...");
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            await _repository.AddAsync(entity, cancellationToken);
+            await _repository.AddAsync(category, cancellationToken);
 
             return StatusCode(201);
         }
         catch (Exception exceptions)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exceptions, "Failed To Create Category With Id: {id}", category.Id);
             throw;
         }
     }
@@ -81,27 +75,29 @@ public class CategoriesController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.NoContent)]
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     [ProducesResponseType((int)HttpStatusCode.NotFound)]
-    public virtual async Task<IActionResult> PutAsync(Category entity,
+    public virtual async Task<IActionResult> PutAsync(Category category,
         CancellationToken cancellationToken)
     {
         try
         {
+            _logger.LogInformation("Updating Category With Id: {categoryId}...", category.Id);
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             Category? entityToUpdate = await _repository
-                .GetByIdAsync(entity.Id, cancellationToken);
+                .GetByIdAsync(category.Id, cancellationToken);
 
             if (entityToUpdate is null)
                 return NotFound();
 
-            await _repository.UpdateAsync(entity, cancellationToken);
+            await _repository.UpdateAsync(category, cancellationToken);
 
             return NoContent();
         }
         catch (Exception exceptions)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exceptions, "Faild To Update Category With Id: {id}", category.Id);
             throw;
         }
     }
@@ -115,6 +111,8 @@ public class CategoriesController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Deleting Category With Id: {categoryId}...", id);
+
             Category? entity = await _repository.GetByIdAsync(id, cancellationToken);
 
             if (entity is null)
@@ -126,7 +124,7 @@ public class CategoriesController : ControllerBase
         }
         catch (Exception exceptions)
         {
-            Log.Error(exceptions.GetExceptionErrorSimplified());
+            _logger.LogError(exceptions, "Faild To Delete Category With Id: {id}", id);
             throw;
         }
     }

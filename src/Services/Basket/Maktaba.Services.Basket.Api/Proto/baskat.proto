@@ -7,7 +7,7 @@ package Basket;
 service Basket
 {
 	rpc GetBasketById(BasketRequest) returns (CustomerBasketResponse);
-	rpc UpdateBasket(CustomerBasketRequest) returns (CustomerBasketResponse);
+	rpc AddBasket(CustomerBasketRequest) returns (CustomerBasketResponse);
 }
 
 message BasketRequest

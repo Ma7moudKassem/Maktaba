@@ -3,6 +3,7 @@
     "BaseUrl": "https://localhost:7054"
   },
   "Routes": [
+    //Catalog
     {
       "UpstreamPathTemplate": "/gateway/v1/catalog/books",
       "UpstreamHttpMethod": [ "Post", "Put" ],
@@ -111,6 +112,8 @@
         }
       ]
     },
+
+    //Identity
     {
       "UpstreamPathTemplate": "/gateway/v1/Identity/Auth/register",
       "UpstreamHttpMethod": [ "Post" ],
@@ -195,6 +198,8 @@
         }
       ]
     },
+
+    //Order
     {
       "UpstreamPathTemplate": "/gateway/Orders/{id}",
       "UpstreamHttpMethod": [ "Get" ],
@@ -216,6 +221,44 @@
         {
           "Host": "localhost",
           "Port": 7211
+        }
+      ]
+    },
+
+    //Basket
+    {
+      "UpstreamPathTemplate": "/gateway/v1/baskets/{id}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamPathTemplate": "/api/v1/baskets/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7055
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/v1/baskets",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/v1/baskets",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7055
+        }
+      ]
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/v1/baskets/checkout",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamPathTemplate": "/api/v1/baskets/checkout",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7055
         }
       ]
     }

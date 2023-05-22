@@ -5,10 +5,12 @@
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(IAuthService authService)
+    public AuthController(IAuthService authService, ILogger<AuthController> logger)
     {
         _authService = authService;
+        _logger = logger;
     }
 
     //Post api/v1/auth/register
@@ -17,18 +19,26 @@ public class AuthController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
     {
-        if (!ModelState.IsValid)
-            return BadRequest();
+        try
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-        AuthModel result = await _authService.RegisterAsync(model);
+            AuthModel result = await _authService.RegisterAsync(model);
 
-        if (!result.IsAuthenticated)
-            return BadRequest();
+            if (!result.IsAuthenticated)
+                return BadRequest();
 
-        if (result.RefreshToken is not null)
-            SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
+            if (result.RefreshToken is not null)
+                SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("{message}", exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     //Post api/v1/auth/logIn
@@ -37,15 +47,23 @@ public class AuthController : ControllerBase
     [ProducesResponseType((int)HttpStatusCode.BadRequest)]
     public async Task<IActionResult> GetTokenAsync([FromBody] TokenRequestModel model)
     {
-        AuthModel result = await _authService.GetTokenAsync(model);
+        try
+        {
+            AuthModel result = await _authService.GetTokenAsync(model);
 
-        if (!result.IsAuthenticated)
-            return BadRequest();
+            if (!result.IsAuthenticated)
+                return BadRequest();
 
-        if (!string.IsNullOrEmpty(result.RefreshToken))
-            SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
+            if (!string.IsNullOrEmpty(result.RefreshToken))
+                SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
 
-        return Ok(result);
+            return Ok(result);
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError("{message}", exception.GetExceptionErrorSimplified());
+            throw;
+        }
     }
 
     //Post api/v1/auth/addRole

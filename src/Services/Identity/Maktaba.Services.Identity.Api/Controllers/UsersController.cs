@@ -1,4 +1,6 @@
-﻿namespace Maktaba.Services.Identity.Api;
+﻿using Maktaba.Services.Identity.gRPC;
+
+namespace Maktaba.Services.Identity.Api;
 
 [Route("api/v1/[controller]")]
 [ApiController]
@@ -6,11 +8,15 @@ public class UsersController : ControllerBase
 {
     private readonly IUserRepository _repository;
     private readonly IMapper _mapper;
+    private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IUserRepository repository, IMapper mapper)
+    public UsersController(IUserRepository repository,
+        IMapper mapper,
+        ILogger<UsersController> logger)
     {
         _repository = repository;
         _mapper = mapper;
+        _logger = logger;
     }
 
     //Get api/v1/users?userName={user name}
@@ -19,6 +25,7 @@ public class UsersController : ControllerBase
     [ProducesResponseType(typeof(string), (int)HttpStatusCode.NotFound)]
     public async Task<IActionResult> GetUserByUserName([FromQuery] string userName)
     {
+        _logger.LogInformation("Get User With User Name: {userName}", userName);
         Domain.User? user = await _repository.GetUserByUserNameAsync(userName);
 
         if (user is null)
@@ -36,12 +43,18 @@ public class UsersController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Updating User With User Name: {userName}...", model.Username);
+
             await _repository.UpdateUserAsync(model);
 
             return NoContent();
         }
         catch (Exception exception)
         {
+            _logger.LogError("Faild To Update Category with User Name: {userName} , Exception: {exceptionMessage}",
+                model.Username,
+                exception.GetExceptionErrorSimplified());
+
             throw new Exception(exception.Message);
         }
     }

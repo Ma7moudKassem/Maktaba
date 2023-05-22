@@ -14,7 +14,7 @@ public class BasketService : BasketBase
     {
         _logger.LogInformation("Call gRPC to get basket with id: {Id}", request.Id);
 
-        CustomerBasket? basket = await _repository.GetBasketAsync(new Guid(request.Id));
+        UserBasket? basket = await _repository.GetBasketAsync(request.Id);
 
         if (basket is not null)
             return MapToCustomerBasketResponse(basket);
@@ -22,13 +22,13 @@ public class BasketService : BasketBase
         return new CustomerBasketResponse();
     }
 
-    public async override Task<CustomerBasketResponse> UpdateBasket(CustomerBasketRequest request, ServerCallContext context)
+    public async override Task<CustomerBasketResponse> AddBasket(CustomerBasketRequest request, ServerCallContext context)
     {
         _logger.LogInformation("Call gRPC to update user basket that has id: {Id}", request.UserId);
 
         var customerBasket = MapToCustomerBasket(request);
 
-        var response = await _repository.UpdateBasketAsync(customerBasket);
+        var response = await _repository.AddBasketAsync(customerBasket);
 
         if (response is not null)
             return MapToCustomerBasketResponse(response);
@@ -36,19 +36,19 @@ public class BasketService : BasketBase
         return new CustomerBasketResponse();
     }
 
-    static CustomerBasket MapToCustomerBasket(CustomerBasketRequest request)
+    static UserBasket MapToCustomerBasket(CustomerBasketRequest request)
     {
-        var basket = new CustomerBasket
+        var basket = new UserBasket
         {
-            UserId = new Guid(request.UserId),
+            UserIdentity = request.UserId,
         };
 
         request.Items.ToList().ForEach(x =>
         {
             basket.Items.Add(new BasketItem
             {
-                Id = new Guid(x.Id),
-                BookId = new Guid(x.BookId),
+                Id = Guid.Parse(x.Id),
+                BookId = Guid.Parse(x.BookId),
                 BookName = x.BookTitle,
                 UnitPrice = (decimal)x.Price,
                 OldUnitPrice = (decimal)x.OldPrice,
@@ -60,11 +60,11 @@ public class BasketService : BasketBase
         return basket;
     }
 
-    static CustomerBasketResponse MapToCustomerBasketResponse(CustomerBasket basket)
+    static CustomerBasketResponse MapToCustomerBasketResponse(UserBasket basket)
     {
         CustomerBasketResponse response = new()
         {
-            UserId = basket.UserId.ToString(),
+            UserId = basket.UserIdentity,
         };
 
         basket.Items.ForEach(x =>
