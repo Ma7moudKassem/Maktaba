@@ -5,8 +5,9 @@ public static class IServiceCollectionExtensions
     public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDomainLayer();
+
         services.AddScoped<IUserRepository, UserRepository>();
+
         services.AddDatabase();
 
         services.ConfigureJwt(configuration);
@@ -37,27 +38,6 @@ public static class IServiceCollectionExtensions
 
         services.AddIdentity<User, IdentityRole>()
             .AddEntityFrameworkStores<IdentityDbContext>();
-
-        services.AddAuthentication(options =>
-        {
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        })
-            .AddJwtBearer(o =>
-            {
-                o.RequireHttpsMetadata = false;
-                o.SaveToken = false;
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidIssuer = configuration["JWT:Issuer"],
-                    ValidAudience = configuration["JWT:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"] ?? string.Empty)),
-                    ClockSkew = TimeSpan.Zero
-                };
-            });
 
         return services;
     }

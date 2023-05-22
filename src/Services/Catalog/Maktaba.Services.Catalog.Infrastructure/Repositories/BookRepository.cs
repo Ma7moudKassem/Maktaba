@@ -1,10 +1,10 @@
 ﻿namespace Maktaba.Services.Catalog.Infrastructure;
 
-public class BookRepository : BaseRepository<Book>, IBookRepository
+public class BookRepository : IBookRepository
 {
     private readonly DbSet<Book> _books;
     private readonly CatalogDbContext _context;
-    public BookRepository(CatalogDbContext context) : base(context)
+    public BookRepository(CatalogDbContext context)
     {
         _context = context;
         _books = context.Set<Book>();

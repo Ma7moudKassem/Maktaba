@@ -3,7 +3,6 @@
 public class EventBusRabbitMQ : IEventBus, IDisposable
 {
     const string BROKER_NAME = "maktaba_event_bus";
-    const string AUTOFAC_SCOPE_NAME = "maktaba_event_bus";
 
     private readonly IRabbitMQPersistentConnection _persistentConnection;
     private readonly ILogger<EventBusRabbitMQ> _logger;
@@ -83,7 +82,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
         policy.Execute(() =>
         {
             var properties = channel.CreateBasicProperties();
-            properties.DeliveryMode = 2; // persistent
+            properties.DeliveryMode = 2;
 
             _logger.LogTrace("Publishing event to RabbitMQ: {EventId}", @event.Id);
 
@@ -200,7 +199,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
         }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "----- ERROR Processing message \"{Message}\"", message);
+            _logger.LogWarning(ex, "ERROR Processing message \"{Message}\"", message);
         }
 
         _consumerChannel.BasicAck(eventArgs.DeliveryTag, multiple: false);

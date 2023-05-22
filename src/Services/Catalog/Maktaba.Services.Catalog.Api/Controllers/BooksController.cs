@@ -1,4 +1,6 @@
-﻿namespace Maktaba.Services.Catalog.Api;
+﻿using Serilog;
+
+namespace Maktaba.Services.Catalog.Api;
 
 [Route("api/v1/[controller]")]
 [ApiController]
@@ -8,14 +10,17 @@ public class BooksController : ControllerBase
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
     private readonly IBookRepository _repository;
+    private readonly ILogger<BooksController> _logger;
     public BooksController(
         IMediator mediator,
         IMapper mapper,
-        IBookRepository repository)
+        IBookRepository repository,
+        ILogger<BooksController> logger)
     {
         _mediator = mediator;
         _mapper = mapper;
         _repository = repository;
+        _logger = logger;
     }
 
     //GET api/v1/books?pageSize=10&pageIndex=0
@@ -25,6 +30,7 @@ public class BooksController : ControllerBase
     {
         try
         {
+            _logger.LogError("Send query to get all books");
             IEnumerable<Book> books = await
                 _mediator.Send(new GetAllBooksQuery(PageSize: pageSize, PageIndex: pageIndex));
 

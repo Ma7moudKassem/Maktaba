@@ -1,27 +1,21 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructureLayer(builder.Configuration);
-builder.Services.AddGrpc();
+builder.AddServiceDefaults();
 
-builder.Services.AddRabbitMqRequiredServices();
+builder.Services.AddGrpc();
+builder.Services.AddDomainLayer();
+builder.Services.AddInfrastructureLayer(builder.Configuration);
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseServiceDefaults();
 
 app.MapControllers();
 
 app.MapGrpcService<UserRpcService>();
 
-app.Run();
+await app.RunAsync();

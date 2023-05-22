@@ -2,8 +2,7 @@
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureLayer(this IServiceCollection services)
     {
         services.AddDataBase();
 
@@ -11,24 +10,8 @@ public static class IServiceCollectionExtensions
         services.AddScoped(sp => new HttpClient
         {
             BaseAddress = new Uri("https://localhost:7037")
-        })
-            .AddScoped<IUserServices, UserServices>()
-            .AddScoped<IBookServices, BookServices>();
-
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(option =>
-                {
-                    option.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = configuration["JWT:Issuer"],
-                        ValidAudience = configuration["JWT:Audience"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"]))
-                    };
-                });
+        }).AddScoped<IUserServices, UserServices>()
+          .AddScoped<IBookServices, BookServices>();
 
         return services;
     }

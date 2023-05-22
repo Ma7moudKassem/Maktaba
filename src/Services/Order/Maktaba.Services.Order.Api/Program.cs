@@ -1,22 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
 
-//builder.Services.ConfigureMassTransitConsumer(builder.Configuration);
+builder.AddServiceDefaults();
+
+builder.Services.AddInfrastructureLayer();
+
 builder.Services.AddControllers();
-builder.Services.AddInfrastructureLayer(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
+app.UseServiceDefaults();
 
 app.MapControllers();
-app.Run();
+
+await app.RunAsync();

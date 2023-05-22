@@ -1,43 +1,20 @@
-﻿global using Maktaba.Services.Identity.gRPC;
-using Grpc.Net.Client;
-
-namespace Maktaba.Services.Order.Infrastructure;
+﻿namespace Maktaba.Services.Order.Infrastructure;
 
 public class OrderRepository : IOrderRepository
 {
     private readonly DbSet<Domain.Order> _dbSet;
-    private readonly DbSet<Domain.User> _users;
     private readonly DbSet<Book> _books;
-    private readonly GrpcChannel _channel;
-    private readonly IdentityServices.IdentityServicesClient _client;
 
     private readonly OrderDbContext _context;
-    private readonly IConfiguration _configuration;
     private readonly IBookServices _bookServices;
     public OrderRepository(OrderDbContext context,
-        IConfiguration configuration,
         IBookServices bookServices
         )
     {
         _context = context;
         _bookServices = bookServices;
-        _configuration = configuration;
-
         _books = context.Set<Book>();
         _dbSet = context.Set<Domain.Order>();
-        _users = context.Set<Domain.User>();
-
-        HttpClientHandler httpHandler = new()
-        {
-            ServerCertificateCustomValidationCallback =
-            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        };
-
-        _channel = GrpcChannel
-            .ForAddress("http://localhost:5111", new GrpcChannelOptions { HttpHandler = httpHandler });
-
-        _client = new IdentityServices.IdentityServicesClient(_channel);
-
     }
 
     public async Task<bool> Exists(Guid id) =>
@@ -74,30 +51,6 @@ public class OrderRepository : IOrderRepository
     {
         try
         {
-            if (!await _users.AnyAsync(x => x.UserName == order.UserName, cancellationToken))
-            {
-                UserName userName = new()
-                {
-                    UserName_ = order.UserName,
-                };
-
-                Identity.gRPC.User userFromRpc = await _client.GetUserAsync(userName,
-                    cancellationToken: cancellationToken) ??
-                    throw new UserNotProvidedException(order.UserName);
-
-                Domain.User user = new()
-                {
-                    Email = userFromRpc.Email,
-                    Name = userFromRpc.Name,
-                    FullAddress = userFromRpc.FullAddress,
-                    PhoneNumber = userFromRpc.PhoneNumber,
-                    UserName = userFromRpc.UserName
-                };
-                await _users.AddAsync(user, cancellationToken);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-
-
             foreach (var orderBook in order.OrderBooks)
             {
                 if (!await _books.AnyAsync(x => x.Id == orderBook.BookId, cancellationToken))

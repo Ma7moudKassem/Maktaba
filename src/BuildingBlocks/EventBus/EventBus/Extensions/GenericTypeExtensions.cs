@@ -8,7 +8,7 @@ public static class GenericTypeExtensions
 
         if (type.IsGenericType)
         {
-            var genericTypes = 
+            var genericTypes =
                 string.Join(",", type.GetGenericArguments().Select(t => t.Name).ToArray());
 
             typeName = $"{type.Name.Remove(type.Name.IndexOf('`'))}<{genericTypes}>";
@@ -18,8 +18,6 @@ public static class GenericTypeExtensions
         return typeName;
     }
 
-    public static string GetGenericTypeName(this object @object)
-    {
-        return @object.GetType().GetGenericTypeName();
-    }
+    public static string GetGenericTypeName(this object @object) =>
+        @object.GetType().GetGenericTypeName();
 }

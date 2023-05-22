@@ -55,11 +55,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Basket.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Maktaba.Services.Basket.Infrastructure", "src\Services\Basket\Maktaba.Services.Basket.Infrastructure\Maktaba.Services.Basket.Infrastructure.csproj", "{CB5694A1-75A8-4411-A346-80D4B44256CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGW", "src\ApiGateway\Ocelot\OcelotGW\OcelotGW.csproj", "{D7956EFE-F3A3-4F6E-BFB7-D6F1067ADC68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGW", "src\ApiGateway\Ocelot\OcelotGW\OcelotGW.csproj", "{D7956EFE-F3A3-4F6E-BFB7-D6F1067ADC68}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{422B8E4C-ECAB-4EB8-9666-812CBDDFC4C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Shared", "Services.Shared\Services.Shared.csproj", "{CF4A4BB4-9BAD-402B-9250-8071FC765B59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Shared", "src\Services\Shared\Services.Shared\Services.Shared.csproj", "{CF4A4BB4-9BAD-402B-9250-8071FC765B59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

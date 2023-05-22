@@ -5,12 +5,10 @@
 public class AuthController : ControllerBase
 {
     private readonly IAuthService _authService;
-    private readonly IMessageBus _bus;
 
-    public AuthController(IAuthService authService, IMessageBus bus)
+    public AuthController(IAuthService authService)
     {
         _authService = authService;
-        _bus = bus;
     }
 
     //Post api/v1/auth/register
@@ -29,8 +27,6 @@ public class AuthController : ControllerBase
 
         if (result.RefreshToken is not null)
             SetRefreshTokenInCookie(result.RefreshToken, result.RefreshTokenExpiration);
-
-        await _bus.PublishMessage(message: result, queueName: "user-queue");
 
         return Ok(result);
     }
