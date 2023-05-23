@@ -8,16 +8,6 @@ public class AddBookCommandHandler : IRequestHandler<AddBookCommand>
         _repository = repository;
     }
 
-    public async Task Handle(AddBookCommand request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            await _repository.AddBookAsync(request.Book);
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
-    }
+    public async Task Handle(AddBookCommand request, CancellationToken cancellationToken) =>
+        await _repository.AddBookAsync(request.Book);
 }

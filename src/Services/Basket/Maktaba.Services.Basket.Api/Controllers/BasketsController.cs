@@ -1,4 +1,6 @@
-﻿namespace Maktaba.Services.Basket.Api;
+﻿using Maktaba.Services.Basket.Api.IntegrationEvents.Services;
+
+namespace Maktaba.Services.Basket.Api;
 
 [Route("api/v1/[controller]")]
 [ApiController]
@@ -7,16 +9,16 @@ public class BasketsController : ControllerBase
 {
     private readonly IBasketRepository _repository;
     private readonly IUserService _userService;
-    private readonly IEventBus _eventBus;
+    private readonly IBasketIntegrationEventService _eventService;
     private readonly ILogger<BasketsController> _logger;
 
     public BasketsController(IBasketRepository repository,
-        IEventBus eventBus,
+        IBasketIntegrationEventService eventService,
         ILogger<BasketsController> logger,
         IUserService userService)
     {
         _repository = repository;
-        _eventBus = eventBus;
+        _eventService = eventService;
         _logger = logger;
         _userService = userService;
     }
@@ -98,7 +100,7 @@ public class BasketsController : ControllerBase
         {
             _logger.LogInformation("Publishing integration event: {IntegrationEventId} to order service to complete order", eventMessage.Id);
 
-            _eventBus.Publish(eventMessage);
+            _eventService.PublishThroughEventBus(eventMessage);
         }
         catch (Exception ex)
         {
@@ -110,7 +112,7 @@ public class BasketsController : ControllerBase
     }
 
     // DELETE api/v1/baskets/5
-    [HttpDelete("{id}")]
+    [HttpDelete("{userIdentity}")]
     [ProducesResponseType(typeof(void), (int)HttpStatusCode.OK)]
     public async Task DeleteBasketByIdAsync([FromRoute] string userIdentity)
     {

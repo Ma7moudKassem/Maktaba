@@ -15,7 +15,7 @@ public class BasketRepository : IBasketRepository
 
     public async Task<UserBasket?> GetBasketAsync(string userId)
     {
-        var data = await _database.StringGetAsync(userId.ToString());
+        var data = await _database.StringGetAsync(userId);
 
         if (data.IsNullOrEmpty)
             return null;

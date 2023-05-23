@@ -6,8 +6,6 @@ public static class SharedExtensions
     {
         builder.Services.AddDefaultAuthentication(builder.Configuration);
 
-        builder.Services.AddIntegrationServices(builder.Configuration);
-
         builder.Services.AddEventBus(builder.Configuration);
 
         builder.Services.AddHttpContextAccessor();
@@ -68,10 +66,9 @@ public static class SharedExtensions
         return services;
     }
 
-    public static IServiceCollection AddIntegrationServices(this IServiceCollection services,
-    IConfiguration configuration)
+    public static IServiceCollection AddEventBus(this IServiceCollection services,
+        IConfiguration configuration)
     {
-
         services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
         {
             var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
@@ -79,6 +76,7 @@ public static class SharedExtensions
             ConnectionFactory factory = new()
             {
                 HostName = configuration["RabbitMQEventBus:HostName"],
+                DispatchConsumersAsync = true
             };
 
             if (!string.IsNullOrEmpty(configuration["RabbitMQEventBus:UserName"]))
@@ -87,31 +85,18 @@ public static class SharedExtensions
             if (!string.IsNullOrEmpty(configuration["RabbitMQEventBus:Password"]))
                 factory.Password = configuration["RabbitMQEventBus:Password"];
 
-            int retryCount = 5;
-            if (!string.IsNullOrEmpty(configuration["RabbitMQEventBus:RetryCount"]))
-                retryCount = int.Parse(configuration["RabbitMQEventBus:RetryCount"] ?? "5");
+            int retryCount = configuration.GetValue("RabbitMQEventBus:RetryCount", 5);
 
             return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
         });
 
-        return services;
-    }
-
-    public static IServiceCollection AddEventBus(this IServiceCollection services,
-        IConfiguration configuration)
-    {
         services.AddSingleton<IEventBus, EventBusRabbitMQ.EventBusRabbitMQ>(sp =>
         {
             string? subscriptionClientName = configuration["RabbitMQEventBus:SubscriptionClientName"];
             var rabbitMQPersistentConnection = sp.GetRequiredService<IRabbitMQPersistentConnection>();
             var logger = sp.GetRequiredService<ILogger<EventBusRabbitMQ.EventBusRabbitMQ>>();
             var eventBusSubcriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
-
-            int retryCount = 5;
-            if (!string.IsNullOrEmpty(configuration["RabbitMQEventBus:RetryCount"]))
-            {
-                retryCount = int.Parse(configuration["RabbitMQEventBus:RetryCount"] ?? "5");
-            }
+            int retryCount = configuration.GetValue("RabbitMQEventBus:RetryCount", 5);
 
             return new EventBusRabbitMQ.EventBusRabbitMQ(
                 rabbitMQPersistentConnection,

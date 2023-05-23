@@ -4,39 +4,47 @@ public class UpdateBookCommandHandler : IRequestHandler<UpdateBookCommand>
 {
     private readonly IBookRepository _repository;
     private readonly ICatalogIntegrationEventService _eventService;
-    public UpdateBookCommandHandler(IBookRepository repository, ICatalogIntegrationEventService eventService)
+    private readonly ILogger<UpdateBookCommandHandler> _logger;
+    public UpdateBookCommandHandler(IBookRepository repository,
+        ICatalogIntegrationEventService eventService,
+        ILogger<UpdateBookCommandHandler> logger)
     {
         _repository = repository;
         _eventService = eventService;
+        _logger = logger;
     }
 
     public async Task Handle(UpdateBookCommand request, CancellationToken cancellationToken)
     {
-        try
+
+        Book bookFromDb = await _repository.GetByIdAsync(request.Book.Id) ??
+            throw new BookNotProvidedException(request.Book.Id.ToString());
+
+        double oldPrice = bookFromDb.Price;
+
+        bool raiseBookPriceChangedEvent = oldPrice != request.Book.Price;
+
+        if (raiseBookPriceChangedEvent)
         {
-            Book bookFromDb = await _repository.GetByIdAsync(request.Book.Id) ??
-                throw new BookNotProvidedException(request.Book.Id.ToString());
+            var priceChangedEvent = new BookPriceChangedIntegrationEvent(
+                bookId: request.Book.Id,
+                oldPrice: oldPrice,
+                newPrice: request.Book.Price);
 
-            double oldPrice = bookFromDb.Price;
-
-            bool raiseBookPriceChangedEvent = oldPrice != request.Book.Price;
-
-            if (raiseBookPriceChangedEvent)
+            try
             {
-                var priceChangedEvent = new BookPriceChangedIntegrationEvent(
-                    bookId: request.Book.Id,
-                    oldPrice: oldPrice,
-                    newPrice: request.Book.Price);
+                _logger.LogInformation("Publishing event: {EventName}", priceChangedEvent.GetGenericTypeName());
 
                 _eventService.PublisThroughEventBusAsync(priceChangedEvent);
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "ERROR Publishing event: {EventName}", priceChangedEvent.GetGenericTypeName());
 
-            await _repository.UpdateBookAsync(request.Book);
+                throw;
+            }
         }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
+
+        await _repository.UpdateBookAsync(request.Book);
     }
 }

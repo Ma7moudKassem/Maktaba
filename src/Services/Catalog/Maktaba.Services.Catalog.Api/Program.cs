@@ -4,7 +4,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddGrpc();
 builder.Services.AddDomainLayer();
-builder.Services.AddApplicationLayer(builder.Configuration);
+builder.Services.AddApplicationLayer();
 builder.Services.AddInfrastructureLayer();
 
 builder.Services.AddControllers();

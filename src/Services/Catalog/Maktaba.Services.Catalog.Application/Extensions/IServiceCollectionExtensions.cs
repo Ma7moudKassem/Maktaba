@@ -2,16 +2,12 @@
 
 public static class IServiceCollectionExtensions
 {
-    public static IServiceCollection AddApplicationLayer(this IServiceCollection services,
-        IConfiguration configuration)
+    public static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
         services.AddMediatR(e =>
         e.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
-        services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>()
-                .AddIntegrationServices(configuration);
-
-        services.AddEventBus(configuration);
+        services.AddTransient<ICatalogIntegrationEventService, CatalogIntegrationEventService>();
 
         return services;
     }

@@ -1,7 +1,4 @@
-﻿using EventBus.Extensions;
-using Microsoft.Extensions.Logging;
-
-namespace Maktaba.Services.Catalog.Application;
+﻿namespace Maktaba.Services.Catalog.Application;
 
 public class CatalogIntegrationEventService : ICatalogIntegrationEventService
 {

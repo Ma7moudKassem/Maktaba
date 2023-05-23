@@ -8,16 +8,7 @@ public class DeleteBookCommandHandler : IRequestHandler<DeleteBookCommand>
         _repository = repository;
     }
 
-    public async Task Handle(DeleteBookCommand request, CancellationToken cancellationToken)
-    {
-        try
-        {
-            await _repository.DeleteBookAsync(request.Id);
-        }
-        catch (Exception exception)
-        {
-            Log.Error(exception.GetExceptionErrorSimplified());
-            throw;
-        }
-    }
+    public async Task Handle(DeleteBookCommand request, CancellationToken cancellationToken) =>
+        await _repository.DeleteBookAsync(request.Id);
+
 }

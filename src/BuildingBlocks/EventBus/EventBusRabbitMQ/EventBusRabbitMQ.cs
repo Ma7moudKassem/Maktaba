@@ -13,6 +13,8 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
     private IModel _consumerChannel;
     private string _queueName;
 
+    private volatile bool disposeValue;
+
     public EventBusRabbitMQ(
         IRabbitMQPersistentConnection persistentConnection,
         ILogger<EventBusRabbitMQ> logger,
@@ -35,9 +37,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
     private void SubsManager_OnEventRemoved(object sender, string eventName)
     {
         if (!_persistentConnection.IsConnected)
-        {
             _persistentConnection.TryConnect();
-        }
 
         using IModel channel = _persistentConnection.CreatModel();
         channel.QueueUnbind(queue: _queueName,
@@ -54,9 +54,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
     public void Publish(IntegrationEvent @event)
     {
         if (!_persistentConnection.IsConnected)
-        {
             _persistentConnection.TryConnect();
-        }
 
         var policy = Policy.Handle<BrokerUnreachableException>()
             .Or<SocketException>()
@@ -72,7 +70,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
         using var channel = _persistentConnection.CreatModel();
         _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", @event.Id);
 
-        channel.ExchangeDeclare(exchange: BROKER_NAME, type: "direct", false, false, null);
+        channel.ExchangeDeclare(exchange: BROKER_NAME, type: ExchangeType.Direct);
 
         var body = JsonSerializer.SerializeToUtf8Bytes(@event, @event.GetType(), new JsonSerializerOptions
         {
@@ -151,13 +149,17 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
 
     public virtual void Dispose(bool disposing)
     {
-        if (disposing)
+        if (!disposeValue)
         {
-            _consumerChannel?.Dispose();
+            if (disposing)
+            {
+                _consumerChannel?.Dispose();
 
-            _subsManager.Clear();
+                _subsManager.Clear();
+            }
         }
     }
+
     public void Dispose()
     {
         Dispose(true);
@@ -214,8 +216,7 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
 
         var channel = _persistentConnection.CreatModel();
 
-        channel.ExchangeDeclare(exchange: BROKER_NAME,
-                                type: "direct");
+        channel.ExchangeDeclare(exchange: BROKER_NAME, ExchangeType.Direct);
 
         channel.QueueDeclare(
             queue: _queueName,
@@ -256,14 +257,21 @@ public class EventBusRabbitMQ : IEventBus, IDisposable
                 }
                 else
                 {
-                    var handler = scope.ServiceProvider.GetService(subscription.HandlerType);
-                    if (handler == null) continue;
-                    var eventType = _subsManager.GetEventTypeByName(eventName);
-                    var integrationEvent = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                    try
+                    {
+                        var handler = scope.ServiceProvider.GetService(subscription.HandlerType);
+                        if (handler == null) continue;
+                        var eventType = _subsManager.GetEventTypeByName(eventName);
+                        var integrationEvent = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                        var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
 
-                    await Task.Yield();
-                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent });
+                        await Task.Yield();
+                        await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent });
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "ERORR processing message");
+                    }
                 }
             }
         }
