@@ -21,5 +21,4 @@ var eventBus = app.Services.GetRequiredService<IEventBus>();
 
 eventBus.Subscribe<BookPriceChangedIntegrationEvent, BookPriceChangedIntegrationEventHandler>();
 
-
 await app.RunAsync();

@@ -10,6 +10,7 @@ global using Services.Shared;
 global using System.Net;
 
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Authorization;
 
 global using MediatR;

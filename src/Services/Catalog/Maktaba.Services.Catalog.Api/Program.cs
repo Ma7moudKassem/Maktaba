@@ -15,6 +15,13 @@ var app = builder.Build();
 
 app.UseServiceDefaults();
 
+using IServiceScope scope = app.Services.CreateScope();
+
+CatalogDbContext context = scope.ServiceProvider
+    .GetRequiredService<CatalogDbContext>();
+
+await context.Database.MigrateAsync();
+
 app.MapControllers();
 
 app.MapGrpcService<CatalogService>();

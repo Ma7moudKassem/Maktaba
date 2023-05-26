@@ -14,6 +14,13 @@ var app = builder.Build();
 
 app.UseServiceDefaults();
 
+using IServiceScope scope = app.Services.CreateScope();
+
+IdentityDbContext context = scope.ServiceProvider
+    .GetRequiredService<IdentityDbContext>();
+
+context.Database.Migrate();
+
 app.MapControllers();
 
 app.MapGrpcService<UserRpcService>();

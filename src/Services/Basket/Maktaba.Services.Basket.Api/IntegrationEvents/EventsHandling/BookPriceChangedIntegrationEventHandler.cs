@@ -40,7 +40,6 @@ public class BookPriceChangedIntegrationEventHandler : IIntegrationEventHandler<
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "ERROR Updating price of books in basket: {BasketId}", basket.UserIdentity);
-
                 }
             }
         }

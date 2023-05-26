@@ -59,7 +59,7 @@ public static class SharedExtensions
                 ValidIssuer = configuration["JWT:Issuer"],
                 ValidAudience = configuration["JWT:Audience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Key"] ??
-                throw new ArgumentNullException("JWT:Key")))
+                throw new ArgumentNullException(configuration["JWT:Key"])))
             };
         });
 
@@ -120,32 +120,32 @@ public static class SharedExtensions
             // Fatal
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Fatal)
-                .WriteTo.File($"Logs/{LogEventLevel.Fatal}-.log", rollingInterval: RollingInterval.Day))
+                .WriteTo.File($"Logs/{LogEventLevel.Fatal}-.log", rollingInterval: RollingInterval.Hour))
 
             // Warning
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Warning)
-                .WriteTo.File($"Logs/{LogEventLevel.Warning}-.log", rollingInterval: RollingInterval.Day))
+                .WriteTo.File($"Logs/{LogEventLevel.Warning}-.log", rollingInterval: RollingInterval.Hour))
 
             // Error
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Error)
-                .WriteTo.File($"Logs/{LogEventLevel.Error}-.log", rollingInterval: RollingInterval.Day))
+                .WriteTo.File($"Logs/{LogEventLevel.Error}-.log", rollingInterval: RollingInterval.Hour))
 
             // Information
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Information)
-                .WriteTo.File($"Logs/{LogEventLevel.Information}-.log", rollingInterval: RollingInterval.Day))
+                .WriteTo.File($"Logs/{LogEventLevel.Information}-.log", rollingInterval: RollingInterval.Hour))
 
             // Debug
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Debug)
-                .WriteTo.File($"Logs/{LogEventLevel.Debug}-.log", rollingInterval: RollingInterval.Day))
+                .WriteTo.File($"Logs/{LogEventLevel.Debug}-.log", rollingInterval: RollingInterval.Hour))
 
             // Verbose
             .WriteTo.Logger(l => l
                 .Filter.ByIncludingOnly(e => e.Level == LogEventLevel.Verbose)
-                .WriteTo.File($"Logs/{LogEventLevel.Verbose}-.log", rollingInterval: RollingInterval.Day));
+                .WriteTo.File($"Logs/{LogEventLevel.Verbose}-.log", rollingInterval: RollingInterval.Hour));
 
         Log.Logger = logger.CreateLogger();
 

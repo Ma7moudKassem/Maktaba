@@ -1,6 +1,4 @@
-﻿using Maktaba.Services.Basket.Api.IntegrationEvents.Services;
-
-namespace Maktaba.Services.Basket.Api;
+﻿namespace Maktaba.Services.Basket.Api;
 
 [Route("api/v1/[controller]")]
 [ApiController]
@@ -85,7 +83,7 @@ public class BasketsController : ControllerBase
 
         CheckoutCompletedEventIntegration eventMessage = new(
             userIdentity: userIdentity,
-            userName: userName,
+            userName: userName ?? throw new ArgumentNullException(userName),
             city: basketCheckout.City,
             street: basketCheckout.Street,
             country: basketCheckout.Country,

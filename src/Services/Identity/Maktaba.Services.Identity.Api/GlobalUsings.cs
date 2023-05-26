@@ -8,6 +8,7 @@ global using Services.Shared;
 global using System.Net;
 
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
 
 global using AutoMapper;
 global using Grpc.Core;
