@@ -1,5 +1,6 @@
 ﻿namespace Maktaba.Services.Orders.Domain.Entities;
 
+
 public class BaseEntity
 {
     public BaseEntity()

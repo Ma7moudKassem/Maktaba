@@ -7,8 +7,6 @@ global using EventBus.Abstractions;
 global using System.Reflection;
 
 global using Microsoft.Extensions.Logging;
-global using Microsoft.Extensions.Configuration;
 global using Microsoft.Extensions.DependencyInjection;
 
 global using MediatR;
-global using Serilog;

@@ -7,7 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Maktaba.Services.Orders.Domain\Maktaba.Services.Orders.Domain.csproj" />
+		<ProjectReference Include="..\Maktaba.Services.Orders.Application\Maktaba.Services.Orders.Application.csproj" />
 	</ItemGroup>
 
 </Project>

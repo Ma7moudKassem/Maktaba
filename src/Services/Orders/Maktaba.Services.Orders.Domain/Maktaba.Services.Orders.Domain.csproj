@@ -10,8 +10,4 @@
     <ProjectReference Include="..\..\Shared\Services.Shared\Services.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
-
 </Project>

@@ -3,12 +3,11 @@
 public class User : BaseEntity
 {
     public string Name { get; set; } = null!;
-
-    public List<PaymentMethod> PaymentMethods { get; set; }
+    public List<PaymentMethod>? PaymentMethods { get; set; }
 
     public User()
     {
-        PaymentMethods = new List<PaymentMethod>();
+        PaymentMethods = new();
     }
 
     public User(string name, Guid id)
@@ -16,5 +15,4 @@ public class User : BaseEntity
         Id = id;
         Name = name;
     }
-
 }
