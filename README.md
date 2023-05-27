@@ -1,8 +1,7 @@
-# Maktaba .NET Microservices Sample Reference Application
-I have implemented Maktaba Microservices project using ASP.NET Core 7.0.
+# Maktaba .NET Microservices Application
+I have implemented Maktaba Microservices application .NET Core 7.0.
 
-## Services: 
-## List of micro-services and infrastructure components
+## Microservices and infrastructure components
 
 <table>
    <thead>
