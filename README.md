@@ -52,7 +52,7 @@ I have implemented Maktaba Microservices project using ASP.NET Core 7.0.
 * Making Microservices more **resilient Use IHttpClientFactory** to implement resilient HTTP requests
 * Implement **Retry and Circuit Breaker patterns** with exponential backoff with IHttpClientFactory and **Polly policies**
 
-#### Docker Compose establishment with all microservices on docker;
+#### Docker Compose establishment with all microservices on docker
 * Containerization of microservices
 * Containerization of databases
 * Override Environment variables
