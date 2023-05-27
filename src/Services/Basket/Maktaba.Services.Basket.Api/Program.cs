@@ -5,7 +5,7 @@ builder.AddServiceDefaults();
 builder.Services.AddInfrastructureLayer(builder.Configuration);
 
 builder.Services.AddTransient<IBasketIntegrationEventService, BasketIntegrationEventService>();
-builder.Services.AddTransient<BookPriceChangedIntegrationEventHandler>();
+builder.Services.AddTransient<IIntegrationEventHandler<BookPriceChangedIntegrationEvent>, BookPriceChangedIntegrationEventHandler>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

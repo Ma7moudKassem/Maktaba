@@ -10,9 +10,4 @@
     <ProjectReference Include="..\Maktaba.Services.Orders.Domain\Maktaba.Services.Orders.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Handlers\" />
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>

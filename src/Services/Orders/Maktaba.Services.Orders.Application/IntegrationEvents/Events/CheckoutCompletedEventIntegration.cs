@@ -1,4 +1,4 @@
-﻿namespace Maktaba.Services.Orders.Domain.Events;
+﻿namespace Maktaba.Services.Orders.Application.IntegrationEvents.Events;
 
 public class CheckoutCompletedEventIntegration : IntegrationEvent
 {

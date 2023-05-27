@@ -4,6 +4,8 @@ public static class SharedExtensions
 {
     public static WebApplicationBuilder AddServiceDefaults(this WebApplicationBuilder builder)
     {
+        builder.Services.ConfigureCors();
+
         builder.Services.AddDefaultAuthentication(builder.Configuration);
 
         builder.Services.AddEventBus(builder.Configuration);
@@ -28,6 +30,7 @@ public static class SharedExtensions
         {
             app.UseHsts();
         }
+        app.UseCors("CorsPolicy");
 
         app.UseStaticFiles();
 
@@ -39,6 +42,19 @@ public static class SharedExtensions
         return app;
     }
 
+    public static IServiceCollection ConfigureCors(this IServiceCollection services)
+    {
+        services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy", builder =>
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+        });
+
+        return services;
+    }
     public static IServiceCollection AddDefaultAuthentication(this IServiceCollection services,
         IConfiguration configuration)
     {
