@@ -27,7 +27,7 @@ The microservice architecture enables an organization to deliver large, complex 
 * MS SQL Server Database<br/>
 * Clean Architecture<br/>
 * Repository Pattern Implementation<br/>
-* CQRS and Mediatr
+* CQRS and Mediatr<br/>
 * Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
     </tr>
@@ -45,7 +45,7 @@ The microservice architecture enables an organization to deliver large, complex 
     <tr>
         <td align="center">3.</td>
         <td>Orders Microservice</td>
-        <td>* ASP.NET Core Web API application <br/>
+        <td>* ASP.NET Core Web API application<br/>
 * REST API, gRPC<br/>
 * MS SQL Server Database<br/>
 * Clean Architecture<br/>
@@ -68,7 +68,7 @@ The microservice architecture enables an organization to deliver large, complex 
     <tr>
         <td align="center">4.</td>
         <td>API Gateway Ocelot Microservice</td>
-        <td>* Implement **API Gateways with Ocelot**<br/>
+        <td>* Implement API Gateways with Ocelot<br/>
 * Containerization using Docker</td>
     </tr>
   </tbody>  
@@ -84,11 +84,11 @@ The microservice architecture enables an organization to deliver large, complex 
 * Override Environment variables
 
 ### TODO
+- [ ] Add Unit Test
+- [ ] Use MongoDB in catalog service
+- [ ] Implement envoy Api Gateway
 - [ ] Add Payment service
-- [ ] Use MongoDB in catalog service 
-- [ ] Use envoy Api Gateway
-- [ ] Implement Front-End SPA project using AngularJS
 - [ ] Create CI/CD pipline by Junkies
 - [ ] Use Apache Kafka
 - [ ] Add SignalR
-- [ ] Add Unit Test
+- [ ] Implement Front-End SPA project using AngularJS
