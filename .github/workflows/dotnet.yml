@@ -36,4 +36,4 @@ jobs:
       run: dotnet build src/Services/Identity/Maktaba.Services.Identity.Api --no-restore
 
     - name: Build Order
-      run: dotnet build src/Services/Order/Maktaba.Services.Order.Api --no-restore
+      run: dotnet build src/Services/Orders/Maktaba.Services.Orders.Api --no-restore
