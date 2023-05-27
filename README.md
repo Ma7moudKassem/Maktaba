@@ -15,8 +15,8 @@ I have implemented Maktaba Microservices project using ASP.NET Core 7.0.
         <td align="center">1.</td>
         <td>Catalog microservice</td>
         <td>
-* ASP.NET Core Web API application 
-* REST API, gRPC
+* ASP.NET Core Web API application __
+* REST API, gRPC__
 * MS SQL Server Database
 * Clean Architecture
 * Repository Pattern Implementation
