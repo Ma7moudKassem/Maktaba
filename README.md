@@ -27,7 +27,6 @@ The microservice architecture enables an organization to deliver large, complex 
 * MS SQL Server Database<br/>
 * Clean Architecture<br/>
 * Repository Pattern Implementation<br/>
-* Swagger Open API implementation<br/>	
 * CQRS and Mediatr
 * Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
@@ -40,7 +39,6 @@ The microservice architecture enables an organization to deliver large, complex 
 * Redis Database<br/>
 * Clean Architecture<br/>
 * Repository Pattern Implementation<br/>
-* Swagger Open API implementation	<br/>
 * Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
     </tr>
@@ -52,7 +50,6 @@ The microservice architecture enables an organization to deliver large, complex 
 * MS SQL Server Database<br/>
 * Clean Architecture<br/>
 * Repository Pattern Implementation<br/>
-* Swagger Open API implementation	<br/>
 * CQRS and Mediatr<br/>
 * Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
@@ -65,7 +62,6 @@ The microservice architecture enables an organization to deliver large, complex 
 * MS SQL Server Database<br/>
 * Clean Architecture<br/>
 * Repository Pattern Implementation<br/>
-* Swagger Open API implementation	<br/>
 * JWT and Refresh Tokens<br/>
 * Containerization using Docker</td>
     </tr>
