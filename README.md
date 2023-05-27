@@ -1,5 +1,5 @@
 # Maktaba .NET Microservices Application
-I have implemented Maktaba Microservices application .NET Core 7.0.
+I have implemented Maktaba Microservices application by .NET Core 7.0.
 
 ## Architecture Overview
 Microservices - also known as the microservice architecture - is an architectural style that structures an application as a collection of services that are:
