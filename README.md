@@ -16,56 +16,56 @@ I have implemented Maktaba Microservices project using ASP.NET Core 7.0.
         <td>Catalog microservice</td>
         <td>
 * ASP.NET Core Web API application<br/>
-* REST API, gRPC\
-* MS SQL Server Database
-* Clean Architecture
-* Repository Pattern Implementation
-* Swagger Open API implementation	
+* REST API, gRPC<br/>
+* MS SQL Server Database<br/>
+* Clean Architecture<br/>
+* Repository Pattern Implementation<br/>
+* Swagger Open API implementation<br/>	
 * CQRS and Mediatr
-* Publish IntegrationEvents using RabbitMQ
+* Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
     </tr>
     <tr>
         <td align="center">2.</td>
         <td>Basket microservice</td>
-        <td>* ASP.NET Core Web API application 
-* REST API, gRPC
-* Redis Database
-* Clean Architecture
-* Repository Pattern Implementation
-* Swagger Open API implementation	
-* Publish IntegrationEvents using RabbitMQ
+        <td>* ASP.NET Core Web API application<br/> 
+* REST API, gRPC<br/>
+* Redis Database<br/>
+* Clean Architecture<br/>
+* Repository Pattern Implementation<br/>
+* Swagger Open API implementation	<br/>
+* Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
     </tr>
     <tr>
         <td align="center">3.</td>
         <td>Orders Microservice</td>
-        <td>* ASP.NET Core Web API application 
-* REST API, gRPC
-* MS SQL Server Database
-* Clean Architecture
-* Repository Pattern Implementation
-* Swagger Open API implementation	
-* CQRS and Mediatr
-* Publish IntegrationEvents using RabbitMQ
+        <td>* ASP.NET Core Web API application <br/>
+* REST API, gRPC<br/>
+* MS SQL Server Database<br/>
+* Clean Architecture<br/>
+* Repository Pattern Implementation<br/>
+* Swagger Open API implementation	<br/>
+* CQRS and Mediatr<br/>
+* Publish IntegrationEvents using RabbitMQ<br/>
 * Containerization using Docker</td>
     </tr>
     <tr>
         <td align="center">4.</td>
         <td>Identity Microservice</td>
         <td>* ASP.NET Core Web API application 
-* REST API, gRPC
-* MS SQL Server Database
-* Clean Architecture
-* Repository Pattern Implementation
-* Swagger Open API implementation	
-* JWT and Refresh Tokens
+* REST API, gRPC<br/>
+* MS SQL Server Database<br/>
+* Clean Architecture<br/>
+* Repository Pattern Implementation<br/>
+* Swagger Open API implementation	<br/>
+* JWT and Refresh Tokens<br/>
 * Containerization using Docker</td>
     </tr>
     <tr>
         <td align="center">4.</td>
         <td>API Gateway Ocelot Microservice</td>
-        <td>* Implement **API Gateways with Ocelot**
+        <td>* Implement **API Gateways with Ocelot**<br/>
 * Containerization using Docker</td>
     </tr>
   </tbody>  
