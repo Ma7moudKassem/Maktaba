@@ -82,3 +82,13 @@ The microservice architecture enables an organization to deliver large, complex 
 * Containerization of microservices
 * Containerization of databases
 * Override Environment variables
+
+### TODO
+- [ ] Add Payment service
+- [ ] Use MongoDB in catalog service 
+- [ ] Use envoy Api Gateway
+- [ ] Implement Front-End SPA project using AngularJS
+- [ ] Create CI/CD pipline by Junkies
+- [ ] Use Apache Kafka
+- [ ] Add SignalR
+- [ ] Add Unit Test
