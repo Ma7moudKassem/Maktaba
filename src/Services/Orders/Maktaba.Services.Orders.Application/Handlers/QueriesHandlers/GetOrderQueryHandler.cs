@@ -1,9 +1,21 @@
 ﻿namespace Maktaba.Services.Orders.Application.Handlers.QueriesHandlers;
 
-public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, Order>
+public class GetOrderQueryHandler : IRequestHandler<GetOrderQuery, Order?>
 {
-    public Task<Order> Handle(GetOrderQuery request, CancellationToken cancellationToken)
+    private readonly IOrderRepository _repository;
+    private readonly ILogger<GetOrderQueryHandler> _logger;
+
+    public GetOrderQueryHandler(IOrderRepository repository,
+        ILogger<GetOrderQueryHandler> logger)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+        _logger = logger;
+    }
+
+    public async Task<Order?> Handle(GetOrderQuery request, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Getting Order with id: {OrderId}", request.Id);
+
+        return await _repository.GetOrderAsync(request.Id,cancellationToken);
     }
 }
