@@ -1,8 +1,36 @@
 version: '3.4'
 
 services:
-  maktaba.api:
-    image: ${DOCKER_REGISTRY-}maktabaapi
+  ocelotgw:
+    image: ${DOCKER_REGISTRY-}ocelotgw
     build:
       context: .
-      dockerfile: src/Maktaba.Api/Dockerfile
+      dockerfile: src/ApiGateway/Ocelot/OcelotGW/Dockerfile
+
+  maktaba.services.basket.api:
+    image: ${DOCKER_REGISTRY-}maktabaservicesbasketapi
+    build:
+      context: .
+      dockerfile: src/Services/Basket/Maktaba.Services.Basket.Api/Dockerfile
+
+
+  maktaba.services.catalog.api:
+    image: ${DOCKER_REGISTRY-}maktabaservicescatalogapi
+    build:
+      context: .
+      dockerfile: src/Services/Catalog/Maktaba.Services.Catalog.Api/Dockerfile
+
+
+  maktaba.services.identity.api:
+    image: ${DOCKER_REGISTRY-}maktabaservicesidentityapi
+    build:
+      context: .
+      dockerfile: src/Services/Identity/Maktaba.Services.Identity.Api/Dockerfile
+
+
+  maktaba.services.orders.api:
+    image: ${DOCKER_REGISTRY-}maktabaservicesordersapi
+    build:
+      context: .
+      dockerfile: src/Services/Orders/Maktaba.Services.Orders.Api/Dockerfile
+

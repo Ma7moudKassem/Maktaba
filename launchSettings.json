@@ -4,7 +4,12 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "maktaba.api": "StartDebugging"
+        "maktaba.api": "StartDebugging",
+        "ocelotgw": "StartDebugging",
+        "maktaba.services.basket.api": "StartDebugging",
+        "maktaba.services.catalog.api": "StartDebugging",
+        "maktaba.services.identity.api": "StartDebugging",
+        "maktaba.services.orders.api": "StartDebugging"
       }
     }
   }
