@@ -6,12 +6,18 @@ services:
     build:
       context: .
       dockerfile: src/ApiGateway/Ocelot/OcelotGW/Dockerfile
+    ports:
+      - "5000:80"     
+      - "40000:443"     
 
   maktaba.services.basket.api:
     image: ${DOCKER_REGISTRY-}maktabaservicesbasketapi
     build:
       context: .
       dockerfile: src/Services/Basket/Maktaba.Services.Basket.Api/Dockerfile
+    ports:
+      - "5001:80"     
+      - "40001:443"   
 
 
   maktaba.services.catalog.api:
@@ -19,18 +25,24 @@ services:
     build:
       context: .
       dockerfile: src/Services/Catalog/Maktaba.Services.Catalog.Api/Dockerfile
-
+    ports:
+      - "5002:80"     
+      - "40002:443"   
 
   maktaba.services.identity.api:
     image: ${DOCKER_REGISTRY-}maktabaservicesidentityapi
     build:
       context: .
       dockerfile: src/Services/Identity/Maktaba.Services.Identity.Api/Dockerfile
-
+    ports:
+      - "5003:80"     
+      - "40003:443"   
 
   maktaba.services.orders.api:
     image: ${DOCKER_REGISTRY-}maktabaservicesordersapi
     build:
       context: .
       dockerfile: src/Services/Orders/Maktaba.Services.Orders.Api/Dockerfile
-
+    ports:
+      - "5004:80"     
+      - "40004:443"   
